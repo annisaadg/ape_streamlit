@@ -1,0 +1,104 @@
+[
+  {
+    "video": "IMG_0065.mov",
+    "model": "baseline.pt",
+    "output": "inference_IMG_0065.mov",
+    "total_objects": 101
+  },
+  {
+    "video": "img_0065.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0065.mov",
+    "total_objects": 101
+  },
+  {
+    "video": "img_0065.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0065_compressed.mp4",
+    "total_objects": 101
+  },
+  {
+    "video": "img_0065.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0065_compressed.mp4",
+    "total_objects": 101
+  },
+  {
+    "video": "img_0065.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0065.mov",
+    "total_objects": 101
+  },
+  {
+    "video": "img_0065.mov",
+    "model": "baseline.pt",
+    "output": "img_0065_inferenced.mp4",
+    "total_objects": 6121
+  },
+  {
+    "video": "img_0065.mov",
+    "model": "baseline.pt",
+    "output": "img_0065_inferenced_compressed.mp4",
+    "total_objects": 6121
+  },
+  {
+    "video": "img_0065.mov",
+    "model": "baseline.pt",
+    "output": "img_0065_inferenced.mp4",
+    "total_objects": 6121
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "baseline.pt",
+    "output": "img_0063_inferenced.mp4",
+    "total_objects": 375
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0063.mov",
+    "total_objects": 5
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0063.mp4",
+    "total_objects": 5
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0063.mov",
+    "total_objects": 5
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0063.mov",
+    "total_objects": 5
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0063.mov",
+    "total_objects": 5
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0063.mov",
+    "total_objects": 5
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0063.mov",
+    "total_objects": 5
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "baseline.pt",
+    "output": "inference_img_0063.mov",
+    "total_objects": 5
+  }
+]
