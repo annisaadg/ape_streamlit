@@ -1,6 +1,8 @@
 import cv2
+import sys
 from ultralytics import solutions
 import os
+import time
 
 def run_inference(video_path, model_path, output_dir):
     """Melakukan inference & counting objek, menyimpan video output dan mengembalikan path dan jumlah objek."""
@@ -15,9 +17,11 @@ def run_inference(video_path, model_path, output_dir):
     h, w = frame.shape[:2]
     fps = int(cap.get(cv2.CAP_PROP_FPS))
 
-    filename = os.path.basename(video_path)
-    output_path = os.path.join(output_dir, f"inference_{filename}")
     os.makedirs(output_dir, exist_ok=True)
+    model_name = os.path.splitext(os.path.basename(model_path))[0]
+    input_name = os.path.basename(video_path)
+    output_filename = f"{model_name}_{input_name}"
+    output_path = os.path.join(output_dir, output_filename)
 
     writer = cv2.VideoWriter(output_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
     region_points = [(100, 0), (100, h)]
@@ -32,6 +36,7 @@ def run_inference(video_path, model_path, output_dir):
     )
 
     cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+    prev_time = time.time()
 
     while cap.isOpened():
         success, frame = cap.read()
@@ -39,7 +44,22 @@ def run_inference(video_path, model_path, output_dir):
             break
         frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
         results = counter(frame)
-        writer.write(results.plot_im)
+        output_frame = results.plot_im
+        
+        curr_time = time.time()
+        fps_text = f"FPS: {1 / (curr_time - prev_time):.2f}"
+        prev_time = curr_time
+
+        (text_width, text_height), _ = cv2.getTextSize(fps_text, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 2)
+        x, y = 10, 40  # posisi kiri atas teks
+        cv2.rectangle(output_frame, (x - 5, y - text_height - 5), (x + text_width + 5, y + 5), (255, 255, 255), -1)
+
+        cv2.putText(
+            output_frame, fps_text, (x, y),
+            cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 0), 2, cv2.LINE_AA
+        )
+        
+        writer.write(output_frame)
 
     cap.release()
     writer.release()
