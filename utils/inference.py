@@ -38,6 +38,9 @@ def run_inference(video_path, model_path, output_dir):
     cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
     prev_time = time.time()
 
+    total_fps = 0
+    frame_count = 0
+
     while cap.isOpened():
         success, frame = cap.read()
         if not success:
@@ -47,15 +50,21 @@ def run_inference(video_path, model_path, output_dir):
         output_frame = results.plot_im
         
         curr_time = time.time()
-        fps_text = f"FPS: {1 / (curr_time - prev_time):.2f}"
+        # fps_text = f"FPS: {1 / (curr_time - prev_time):.2f}"
+        fps = 1 / (curr_time - prev_time)
+        total_fps = total_fps + fps
+        frame_count += 1
+        avg_fps = total_fps/frame_count
+        avg_fps_str = float("{:.2f}".format(avg_fps))
+        avg_fps_text = f"FPS: {avg_fps_str}"
         prev_time = curr_time
 
-        (text_width, text_height), _ = cv2.getTextSize(fps_text, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 2)
+        (text_width, text_height), _ = cv2.getTextSize(avg_fps_text, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 2)
         x, y = 10, 40  # posisi kiri atas teks
         cv2.rectangle(output_frame, (x - 5, y - text_height - 5), (x + text_width + 5, y + 5), (255, 255, 255), -1)
 
         cv2.putText(
-            output_frame, fps_text, (x, y),
+            output_frame, avg_fps_text, (x, y),
             cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 0), 2, cv2.LINE_AA
         )
         
