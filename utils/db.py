@@ -24,7 +24,7 @@ def is_inference_exist(video_filename, model_name):
             return True
     return False
 
-def save_inference_result(video_path, model_name, output_path, total_objects):
+def save_inference_result(video_path, model_name, output_path, total_objects, avg_fps):
     """Simpan hasil inferensi ke file JSON."""
     try:
         with open(DATA_FILE, "r") as f:
@@ -36,7 +36,8 @@ def save_inference_result(video_path, model_name, output_path, total_objects):
         "video": os.path.basename(video_path),
         "model": model_name,
         "output": os.path.basename(output_path),
-        "total_objects": total_objects
+        "total_objects": total_objects,
+        "avg_fps": avg_fps
     })
 
     with open(DATA_FILE, "w") as f:
@@ -45,7 +46,7 @@ def save_inference_result(video_path, model_name, output_path, total_objects):
 def get_rekapitulasi():
     """Ambil rekap deteksi dari file JSON sebagai DataFrame."""
     if not os.path.exists(DATA_FILE):
-        return pd.DataFrame(columns=["video", "model", "output", "total_objects"])
+        return pd.DataFrame(columns=["video", "model", "output", "total_objects", "avg_fps"])
     with open(DATA_FILE, "r") as f:
         data = json.load(f)
     return pd.DataFrame(data)
