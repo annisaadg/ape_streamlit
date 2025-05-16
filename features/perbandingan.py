@@ -6,8 +6,8 @@ import pandas as pd
 
 def run():
     st.header("📊 Perbandingan Performa Model")
-    model_names = [f for f in os.listdir("models") if f.endswith(".pt")]
     evaluation_data = load_evaluation_results()
+    model_names = list({item['model_name'] for item in evaluation_data})
 
     model1 = st.selectbox("Model A", model_names, key="model1")
     model2 = st.selectbox("Model B", model_names, key="model2")
