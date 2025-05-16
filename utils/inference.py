@@ -74,4 +74,4 @@ def run_inference(video_path, model_path, output_dir):
     writer.release()
     cv2.destroyAllWindows()
 
-    return output_path, counter.in_count + counter.out_count
+    return output_path, counter.in_count + counter.out_count, avg_fps_str

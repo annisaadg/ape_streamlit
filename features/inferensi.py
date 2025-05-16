@@ -42,8 +42,8 @@ def run():
             return
 
         with st.spinner("⏳ Proses inferensi sedang berjalan..."):
-            output_path, total_objects = run_inference(video_path, f"models/{selected_model}", OUTPUT_DIR)
-            save_inference_result(video_path, selected_model, output_path, total_objects)
+            output_path, total_objects, avg_fps = run_inference(video_path, f"models/{selected_model}", OUTPUT_DIR)
+            save_inference_result(video_path, selected_model, output_path, total_objects, avg_fps)
             st.success(f"Inferensi selesai. Total objek terdeteksi: {total_objects}")
             output_path = compress(output_path, OUTPUT_DIR)
             render_video(output_path)
