@@ -1,5 +1,4 @@
 import cv2
-import sys
 from ultralytics import solutions
 import os
 import time

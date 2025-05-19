@@ -7,6 +7,10 @@ import os
 def run():
     st.header("📋 Rekapitulasi Jumlah Objek Terdeteksi")
     df = get_rekapitulasi()
+    
+    df = df.reset_index(drop=True)  
+    df.index += 1  
+    df.index.name = 'No'  
     st.dataframe(df)
     
     st.markdown("### Pratinjau Video")
