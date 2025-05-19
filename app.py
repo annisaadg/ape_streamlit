@@ -6,11 +6,11 @@ st.set_page_config(page_title=PAGE_TITLE, layout="wide")
 st.title("🎥 APE - Aplikasi Pendukung Eksperimen: Deteksi dan Penghitungan Jeruk")
 
 # Sidebar: Pilih fitur
-fitur_dipilih = st.sidebar.radio("Pilih Fitur", ["Inferensi", "Perbandingan Model", "Rekapitulasi Jumlah Objek"])
+fitur_dipilih = st.sidebar.radio("Pilih Fitur", ["Inferensi", "Perbandingan Model", "Rekap Inferensi"])
 
 if fitur_dipilih == "Inferensi":
     inferensi.run()
 elif fitur_dipilih == "Perbandingan Model":
     perbandingan.run()
-elif fitur_dipilih == "Rekapitulasi Jumlah Objek":
+elif fitur_dipilih == "Rekap Inferensi":
     rekapitulasi.run()
