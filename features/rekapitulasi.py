@@ -17,7 +17,8 @@ def run():
     if selected_video != "-- Pilih Video --":
         full_path = os.path.join(VIDEO_OUTPUT_DIR, selected_video)
         if os.path.exists(full_path):
-            with st.container():
-                render_video(full_path)
+            video_container = st.empty()
+            video_html = render_video(full_path)
+            video_container.markdown(video_html, unsafe_allow_html=True)
         else:
             st.error(f"❌ Video tidak ditemukan di `{full_path}`.")

@@ -14,6 +14,6 @@ def render_video(video_path):
                 </video>
             </div>
         """
-        st.markdown(video_html, unsafe_allow_html=True)
+        return video_html
     except Exception as e:
-        st.error(f"❌ Tidak dapat memutar video. Error: {e}")
+        return f"❌ Tidak dapat memutar video. Error: {e}"

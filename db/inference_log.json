@@ -9,6 +9,14 @@
     "video": "img_0065.mov",
     "model": "baseline.pt",
     "output": "baseline_img_0065.mov",
-    "total_objects": 101
+    "total_objects": 97,
+    "avg_fps": 3.93
+  },
+  {
+    "video": "img_0068.mov",
+    "model": "baseline.pt",
+    "output": "baseline_img_0068.mov",
+    "total_objects": 1,
+    "avg_fps": 5.14
   }
 ]
