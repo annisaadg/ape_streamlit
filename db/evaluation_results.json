@@ -1,6 +1,6 @@
 [
     {
-      "model_name": "baseline.pt",
+      "model_name": "Baseline.pt",
       "precision": 0.8522496908225836,
       "recall": 0.6675860982624597,
       "map50": 0.7787334753109989,
@@ -8,7 +8,7 @@
       "params": 2590035
     },
     {
-      "model_name": "c2pss.pt",
+      "model_name": "C2PSS.pt",
       "precision": 0.8335013205521624,
       "recall": 0.6505330893682002,
       "map50": 0.7557926950181841,
@@ -16,12 +16,116 @@
       "params": 2770899
     },
     {
-      "model_name": "sodl.pt",
+      "model_name": "SODL_DySample.pt",
       "precision": 0.821498598331677,
       "recall": 0.682153134390168,
       "map50": 0.777594472820458,
       "map50_95": 0.481750765200416,
       "params": 2681252
-    }
+    },
+    {
+    "model_name": "FRM.pt",
+    "precision": 0.8215608855506176,
+    "recall": 0.6777689337409661,
+    "map50": 0.767454149953199,
+    "map50_95": 0.4682159549166098,
+    "params": 5487639
+  },
+  {
+    "model_name": "SPPFELAN.pt",
+    "precision": 0.8531055684998611,
+    "recall": 0.6603580144962857,
+    "map50": 0.7618215673689237,
+    "map50_95": 0.49017307395421705,
+    "params": 2672467
+  },
+  {
+    "model_name": "C2PSS+SODL_DySample.pt",
+    "precision": 0.8253626151967112,
+    "recall": 0.7076142131979696,
+    "map50": 0.7907453627235822,
+    "map50_95": 0.46732346875429914,
+    "params": 2862116
+  },
+  {
+    "model_name": "C2PSS+FRM.pt",
+    "precision": 0.8575145605623365,
+    "recall": 0.6680203045685279,
+    "map50": 0.7686387817218758,
+    "map50_95": 0.4532201505692857,
+    "params": 5668503
+  },
+  {
+    "model_name": "C2PSS+SPPFELAN.pt",
+    "precision": 0.8654955844046024,
+    "recall": 0.6336711749314842,
+    "map50": 0.7411055246247971,
+    "map50_95": 0.45953454328717475,
+    "params": 2853331
+  },
+  {
+    "model_name": "SODL_DySample+FRM.pt",
+    "precision": 0.8663064312160698,
+    "recall": 0.650761421319797,
+    "map50": 0.7805286548231358,
+    "map50_95": 0.4911254450536811,
+    "params": 4232808
+  },
+  {
+    "model_name": "SODL_DySample+SPPFELAN.pt",
+    "precision": 0.8270006388653305,
+    "recall": 0.6375634517766497,
+    "map50": 0.7392491072464241,
+    "map50_95": 0.4656697764533592,
+    "params": 2763684
+  },
+  {
+    "model_name": "FRM+SPPFELAN.pt",
+    "precision": 0.813346630243213,
+    "recall": 0.6487309644670051,
+    "map50": 0.7366751066836996,
+    "map50_95": 0.4563368167714267,
+    "params": 4224023
+  },
+  {
+    "model_name": "C2PSS+SODL_DySample+FRM.pt",
+    "precision": 0.819542907002155,
+    "recall": 0.6802030456852792,
+    "map50": 0.7750032470785713,
+    "map50_95": 0.47823485412694805,
+    "params": 4413672
+  },
+  {
+    "model_name": "C2PSS+SODL_DySample+SPPFELAN.pt",
+    "precision": 0.8173506956001472,
+    "recall": 0.6950975879905562,
+    "map50": 0.7837051874248051,
+    "map50_95": 0.49744937255962673,
+    "params": 2944548
+  },
+  {
+    "model_name": "C2PSS+FRM+SPPFELAN.pt",
+    "precision": 0.8575862241047585,
+    "recall": 0.6436548223350254,
+    "map50": 0.7692454032518509,
+    "map50_95": 0.4676965669570251,
+    "params": 4404887
+  },
+  {
+    "model_name": "SODL_DySample+FRM+SPPFELAN.pt",
+    "precision": 0.8381741061972093,
+    "recall": 0.6467778965805617,
+    "map50": 0.7628791715610638,
+    "map50_95": 0.4554453960332269,
+    "params": 4315240
+  },
+  {
+    "model_name": "C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
+    "precision": 0.8517015635439782,
+    "recall": 0.6852791878172588,
+    "map50": 0.7938464674857677,
+    "map50_95": 0.5039865272908973,
+    "params": 4496104
+  }
   ]
   
