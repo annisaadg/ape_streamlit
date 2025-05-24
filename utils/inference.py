@@ -12,7 +12,7 @@ def run_inference(video_path, model_path, output_dir):
     if not success:
         raise ValueError("Frame pertama tidak dapat dibaca.")
 
-    frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+    # frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
     h, w = frame.shape[:2]
     fps = int(cap.get(cv2.CAP_PROP_FPS))
 
