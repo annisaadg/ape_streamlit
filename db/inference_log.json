@@ -33,5 +33,19 @@
     "output": "C2PSS+SODL_DySample+FRM_img_0063.mov",
     "total_objects": 7,
     "avg_fps": 7.49
+  },
+  {
+    "video": "img_0056_13.mov",
+    "model": "C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
+    "output": "C2PSS+SODL_DySample+FRM+SPPFELAN_img_0056_13.mov",
+    "total_objects": 0,
+    "avg_fps": 7.83
+  },
+  {
+    "video": "img_0056_13.mov",
+    "model": "Baseline.pt",
+    "output": "Baseline_img_0056_13.mov",
+    "total_objects": 0,
+    "avg_fps": 19.26
   }
 ]

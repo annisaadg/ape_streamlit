@@ -12,7 +12,6 @@ def run():
     # Upload Video
     uploaded_video = st.file_uploader("Unggah video", type=None)
     video_path = None
-    print("EXTTT:", uploaded_video)
     if uploaded_video:
         if uploaded_video:
             ext = os.path.splitext(uploaded_video.name)[1].lower()
