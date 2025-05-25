@@ -1,51 +1,37 @@
 [
   {
-    "video": "img_0063.mov",
-    "model": "baseline.pt",
-    "output": "baseline_img_0063.mov",
-    "total_objects": 5,
-    "avg_fps": 12.39
+    "video": "10.mov",
+    "model": "Baseline.pt",
+    "output": "Baseline_10.mov",
+    "total_objects": 0,
+    "avg_fps": 17.07
   },
   {
-    "video": "13.mov",
-    "model": "baseline.pt",
-    "output": "baseline_13.mov",
-    "total_objects": 9,
-    "avg_fps": 12.45
+    "video": "10.mov",
+    "model": "C2PSS.pt",
+    "output": "C2PSS_10.mov",
+    "total_objects": 0,
+    "avg_fps": 15.86
+  },
+  {
+    "video": "img_0063.mov",
+    "model": "C2PSS.pt",
+    "output": "C2PSS_img_0063.mov",
+    "total_objects": 1,
+    "avg_fps": 13.33
+  },
+  {
+    "video": "11.mov",
+    "model": "Baseline.pt",
+    "output": "Baseline_11.mov",
+    "total_objects": 10,
+    "avg_fps": 16.09
   },
   {
     "video": "img_0065.mov",
-    "model": "baseline.pt",
-    "output": "baseline_img_0065.mov",
-    "total_objects": 101,
-    "avg_fps": 12.03
-  },
-  {
-    "video": "img_0063.mov",
-    "model": "C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
-    "output": "C2PSS+SODL_DySample+FRM+SPPFELAN_img_0063.mov",
-    "total_objects": 6,
-    "avg_fps": 7.31
-  },
-  {
-    "video": "img_0063.mov",
-    "model": "C2PSS+SODL_DySample+FRM.pt",
-    "output": "C2PSS+SODL_DySample+FRM_img_0063.mov",
-    "total_objects": 7,
-    "avg_fps": 7.49
-  },
-  {
-    "video": "img_0056_13.mov",
-    "model": "C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
-    "output": "C2PSS+SODL_DySample+FRM+SPPFELAN_img_0056_13.mov",
-    "total_objects": 0,
-    "avg_fps": 7.83
-  },
-  {
-    "video": "img_0056_13.mov",
     "model": "Baseline.pt",
-    "output": "Baseline_img_0056_13.mov",
-    "total_objects": 0,
-    "avg_fps": 19.26
+    "output": "Baseline_img_0065.mov",
+    "total_objects": 87,
+    "avg_fps": 11.47
   }
 ]
