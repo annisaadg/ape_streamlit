@@ -11,8 +11,11 @@ def run_inference(video_path, model_path, output_dir):
     success, frame = cap.read()
     if not success:
         raise ValueError("Frame pertama tidak dapat dibaca.")
+    
+    # Rotasi hanya jika frame awal adalah landscape
+    if frame.shape[1] > frame.shape[0]:
+        frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
 
-    # frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
     h, w = frame.shape[:2]
     fps = int(cap.get(cv2.CAP_PROP_FPS))
 
@@ -23,7 +26,10 @@ def run_inference(video_path, model_path, output_dir):
     output_path = os.path.join(output_dir, output_filename)
 
     writer = cv2.VideoWriter(output_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
-    region_points = [(100, 0), (100, h)]
+    
+    # Garis vertikal di tengah
+    region_center_x = w // 2
+    region_points = [(region_center_x, 0), (region_center_x, h)]
 
     counter = solutions.ObjectCounter(
         show=True,
@@ -44,7 +50,11 @@ def run_inference(video_path, model_path, output_dir):
         success, frame = cap.read()
         if not success:
             break
-        frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+        
+        # Rotasi semua frame agar portrait
+        if frame.shape[1] > frame.shape[0]:
+            frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+            
         results = counter(frame)
         output_frame = results.plot_im
         
