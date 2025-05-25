@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import os
 
 def run():
-    st.header("📊 Perbandingan Performa Dua Model")
+    st.header("📊 Perbandingan Hasil Train Dua Model")
     evaluation_data = load_evaluation_results()
     model_names = list({item['model_name'] for item in evaluation_data})
     model_names = ["-- Pilih Model --"] + sorted(model_names)  # tambahkan opsi default
@@ -37,11 +37,11 @@ def run():
         st.table({
             "Metrik": ["Precision", "Recall", "mAP50", "mAP50-95", "Jumlah Parameter"],
             model1: [
-                f"{eval1.get(k, '-'):.4f}" if isinstance(eval1.get(k, "-"), float) else format_params(eval1.get(k, "-"))
+                f"{eval1.get(k, '-') * 100:.2f}%".replace('.', ',') if isinstance(eval1.get(k, "-"), float) else format_params(eval1.get(k, "-"))
                 for k in ["precision", "recall", "map50", "map50_95", "params"]
             ],
             model2: [
-                f"{eval2.get(k, '-'):.4f}" if isinstance(eval2.get(k, "-"), float) else format_params(eval2.get(k, "-"))
+                f"{eval2.get(k, '-') * 100:.2f}%".replace('.', ',') if isinstance(eval2.get(k, "-"), float) else format_params(eval2.get(k, "-"))
                 for k in ["precision", "recall", "map50", "map50_95", "params"]
             ]
         })
@@ -129,6 +129,24 @@ def run():
     else:
         df_filtered = df
 
+    # --- Tabel Sortable ---
+    st.subheader("📋 Tabel Ringkasan Performa")
+    df_display = df_filtered[['model_name', 'precision', 'recall', 'map50', 'map50_95', 'params']].copy()
+    df_display.columns = ['Model', 'Precision(%)', 'Recall(%)', 'mAP50(%)', 'mAP50-95(%)', 'Jumlah Parameter']
+    df_display['Precision(%)'] = (df_display['Precision(%)'] * 100).round(2)
+    df_display['Recall(%)'] = (df_display['Recall(%)'] * 100).round(2)
+    df_display['mAP50(%)'] = (df_display['mAP50(%)'] * 100).round(2)
+    df_display['mAP50-95(%)'] = (df_display['mAP50-95(%)'] * 100).round(2)
+    df_display['Jumlah Parameter'] = df_display['Jumlah Parameter'].apply(lambda x: f"{int(x):,}")
+    
+    # Tambahkan kolom indeks khusus (0, M1, ..., C11)
+    custom_indices = ['0', 'M1', 'M2', 'M3', 'M4', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11']
+    # Reset index dan assign ulang berdasarkan urutan data yang tersaring
+    df_display.insert(0, 'ID', custom_indices[:len(df_display)])
+
+    st.dataframe(df_display, use_container_width=True, hide_index=True)
+
+    # --- Grafik Per Metrik ---
     metrics = ['precision', 'recall', 'map50', 'map50_95']
     metric_titles = {
         'precision': 'Precision',
