@@ -45,7 +45,7 @@ def run():
             save_inference_result(video_path, selected_model, output_path, total_objects, avg_fps)
             st.success(f"Inferensi selesai. Total objek terdeteksi: {total_objects}")
             output_path = compress(output_path, OUTPUT_DIR)
-            render_video(output_path)
+            st.markdown(render_video(output_path), unsafe_allow_html=True)
 
             try:
                 for f in os.listdir(UPLOAD_DIR):
