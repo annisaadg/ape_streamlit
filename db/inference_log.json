@@ -1,0 +1,9 @@
+[
+  {
+    "video": "jeruk12.mov",
+    "model": "Baseline.pt",
+    "output": "Baseline_jeruk12.mov",
+    "total_objects": 0,
+    "avg_fps": 9.03
+  }
+]
