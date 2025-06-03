@@ -1,9 +1,9 @@
 [
   {
     "video": "jeruk12.mov",
-    "model": "Baseline.pt",
-    "output": "Baseline_jeruk12.mov",
-    "total_objects": 0,
-    "avg_fps": 9.03
+    "model": "M1-C2PSS.pt",
+    "output": "M1-C2PSS_jeruk12.mov",
+    "total_objects": 12,
+    "avg_fps": 8.74
   }
 ]
