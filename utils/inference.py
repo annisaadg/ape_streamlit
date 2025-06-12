@@ -39,7 +39,8 @@ def run_inference(video_path, model_path, output_dir):
         model=model_path,
         show_in=True,
         show_out=True,
-        classes=[0]
+        classes=[0],
+        conf=0.5
     )
 
     cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
