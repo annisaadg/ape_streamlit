@@ -1,37 +1,9 @@
 [
   {
-    "video": "10.mov",
-    "model": "Baseline.pt",
-    "output": "Baseline_10.mov",
-    "total_objects": 0,
-    "avg_fps": 17.07
-  },
-  {
-    "video": "10.mov",
-    "model": "C2PSS.pt",
-    "output": "C2PSS_10.mov",
-    "total_objects": 0,
-    "avg_fps": 15.86
-  },
-  {
-    "video": "img_0063.mov",
-    "model": "C2PSS.pt",
-    "output": "C2PSS_img_0063.mov",
-    "total_objects": 1,
-    "avg_fps": 13.33
-  },
-  {
-    "video": "11.mov",
-    "model": "Baseline.pt",
-    "output": "Baseline_11.mov",
-    "total_objects": 10,
-    "avg_fps": 16.09
-  },
-  {
-    "video": "img_0065.mov",
-    "model": "Baseline.pt",
-    "output": "Baseline_img_0065.mov",
-    "total_objects": 87,
-    "avg_fps": 11.47
+    "video": "jeruk12.mov",
+    "model": "M1-C2PSS.pt",
+    "output": "M1-C2PSS_jeruk12.mov",
+    "total_objects": 12,
+    "avg_fps": 8.74
   }
 ]

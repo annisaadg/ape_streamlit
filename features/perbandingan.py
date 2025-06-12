@@ -146,26 +146,8 @@ def run():
 
     st.dataframe(df_display, use_container_width=True, hide_index=True)
 
-    # --- Grafik Per Metrik ---
-    metrics = ['precision', 'recall', 'map50', 'map50_95']
-    metric_titles = {
-        'precision': 'Precision',
-        'recall': 'Recall',
-        'map50': 'mAP@0.5',
-        'map50_95': 'mAP@0.5:0.95'
-    }
-
-    for metric in metrics:
-        st.subheader(f"{metric_titles[metric]}")
-
-        chart = alt.Chart(df_filtered).mark_bar(cornerRadiusTopLeft=3, cornerRadiusTopRight=3).encode(
-            x=alt.X('model_name:N', title='Model'),
-            y=alt.Y(f'{metric}:Q', title='Nilai'),
-            color=alt.Color('model_name:N', legend=None),
-            tooltip=['model_name', f'{metric}']
-        ).properties(height=300).configure_axis(labelAngle=0)
-
-        st.altair_chart(chart, use_container_width=True)
+    # --- Bar Chart ---
+    plot_bar_charts(df, selected_models)
 
 def plot_metrics_per_epoch(selected_models, evaluation_dir):
     import matplotlib.pyplot as plt
@@ -217,3 +199,52 @@ def plot_metrics_per_epoch(selected_models, evaluation_dir):
 
     plt.tight_layout()
     st.pyplot(fig)
+
+def plot_bar_charts(df, selected_models):
+    colors = [
+        'blue', 'green', 'orange', 'red', 'purple', 'brown', 'pink', 'gray',
+        'olive', 'cyan', 'magenta', 'navy', 'teal', 'gold', 'coral', 'black'
+    ]
+
+    # Filter dataframe sesuai pilihan user, jika kosong berarti semua model
+    if selected_models:
+        df_filtered = df[df['model_name'].isin(selected_models)].copy()
+    else:
+        df_filtered = df.copy()
+
+    # Buat mapping model_name -> warna
+    unique_models = df_filtered['model_name'].unique().tolist()
+    model_color_map = {model: colors[i % len(colors)] for i, model in enumerate(unique_models)}
+
+    # Urutan custom model (baseline, m1-m4, c1-c11)
+    custom_order = ['baseline', 'm1', 'm2', 'm3', 'm4'] + [f'c{i}' for i in range(1, 12)]
+
+    metrics = ['precision', 'recall', 'map50', 'map50_95']
+    metric_titles = {
+        'precision': 'Precision',
+        'recall': 'Recall',
+        'map50': 'mAP50',
+        'map50_95': 'mAP50-95'
+    }
+
+    for metric in metrics:
+        st.subheader(f"{metric_titles[metric]}")
+
+        chart = alt.Chart(df_filtered).mark_bar(
+            cornerRadiusTopLeft=3,
+            cornerRadiusTopRight=3
+        ).encode(
+            x=alt.X('model_name:N', sort=custom_order, title='Model'),
+            y=alt.Y(f'{metric}:Q', title='Nilai'),
+            color=alt.Color('model_name:N',
+                            scale=alt.Scale(domain=list(model_color_map.keys()),
+                                            range=list(model_color_map.values())),
+                            legend=None),
+            tooltip=['model_name', f'{metric}']
+        ).properties(
+            height=300
+        ).configure_axis(
+            labelAngle=0
+        )
+
+        st.altair_chart(chart, use_container_width=True)
