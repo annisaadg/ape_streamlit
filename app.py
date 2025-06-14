@@ -1,9 +1,6 @@
 import streamlit as st
 from config.settings import PAGE_TITLE
 from features import inferensi, perbandingan, rekapitulasi
-import os
-import sys
-sys.path.insert(0, os.path.abspath(".")) 
 
 st.set_page_config(page_title=PAGE_TITLE, layout="wide")
 st.title("🎥 APE - Aplikasi Pendukung Eksperimen: Deteksi dan Penghitungan Jeruk")
