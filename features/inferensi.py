@@ -57,10 +57,10 @@ def run():
             except Exception as e:
                 st.warning(f"⚠️ Gagal menghapus file di folder upload: {e}")
     
-    st.header("🔍🖼️ Inferensi Deteksi Foto")
+    st.header("🔍🖼️ Inferensi Deteksi Gambar")
     # Upload Video
-    uploaded_img = st.file_uploader("Unggah foto", type=None)
-    uploaded_label = st.file_uploader("Unggah label", type=None)
+    uploaded_img = st.file_uploader("Unggah gambar", type=None)
+    uploaded_label = st.file_uploader("Unggah label (Opsional)", type=None)
     img_path = None
     label_path = None
 
@@ -97,13 +97,28 @@ def run():
             except Exception as e:
                 st.error(f"❌ Gagal menyimpan label: {e}")
     
-    if st.button("Jalankan Inferensi Foto"):
-        if not img_path or not label_path:
-            st.error("❌ Silakan unggah foto dan label terlebih dahulu.")
+    if st.button("Jalankan Inferensi Gambar"):
+        if not img_path:
+            st.error("❌ Silakan unggah gambar terlebih dahulu.")
             return
         
         with st.spinner("⏳ Proses inferensi sedang berjalan..."):
-            gt_path, output_dir, stats_all, total_gt = run_inference_img(img_path, label_path)
+            label_path_input = label_path if label_path and os.path.exists(label_path) else None
+            gt_path, output_dir, stats_all, total_gt = run_inference_img(img_path, label_path_input)
+
+            # 🔻 Hapus file gambar dan label setelah inferensi
+            try:
+                for f in os.listdir(UPLOAD_DIR_IMG):
+                    file_path = os.path.join(UPLOAD_DIR_IMG, f)
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
+                for f in os.listdir(UPLOAD_DIR_LABEL):
+                    file_path = os.path.join(UPLOAD_DIR_LABEL, f)
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
+                st.info("📂 Semua file unggahan telah dihapus setelah inferensi.")
+            except Exception as e:
+                st.warning(f"⚠️ Gagal menghapus file di folder upload: {e}")
 
             st.markdown("### Keterangan Bounding Box")
             st.markdown("""
@@ -114,15 +129,15 @@ def run():
 
             # === Tampilkan Ground Truth di tengah ===
             col1, col2, col3 = st.columns([1, 2, 1])
-            with col2:
-                st.markdown(f"### Ground Truth: {total_gt}")
-                st.image(gt_path, caption="Ground Truth", use_container_width=True)
+
+            if gt_path:
+                with col2:
+                    st.markdown(f"### Ground Truth: {total_gt}")
+                    st.image(gt_path, caption="Ground Truth")  # Ukuran disesuaikan
+            else:
+                st.info("📂 Ground truth tidak tersedia. Hanya menampilkan hasil prediksi.")
 
             # === Tampilkan hasil semua model ===
-            # model_images = sorted(
-            #     [f for f in os.listdir(output_dir) if f.endswith(".jpg") and f != "ground_truth.jpg"]
-            # )
-
             custom_order = ['baseline', 'm1', 'm2', 'm3', 'm4'] + [f'c{i}' for i in range(1, 12)]
             model_images = [f for f in os.listdir(output_dir) if f.endswith('.jpg') and f.lower() != 'ground_truth.jpg']
 
@@ -151,6 +166,7 @@ def run():
                             )
 
             # Tampilkan stats
+            st.header("📋 Tabel Hasil Inferensi")
             stats_all.sort(key=lambda d: custom_order.index(extract_prefix(d['model'])) if extract_prefix(d['model']) in custom_order else 999)
 
             st.dataframe(pd.DataFrame(stats_all))

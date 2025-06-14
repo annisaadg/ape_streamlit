@@ -171,30 +171,34 @@ def load_models():
         models.append((model, name))  # return tuple, bukan cuma model
     return models
 
-def run_inference_img(img_path, label_path, iou_threshold=0.5):
+def run_inference_img(img_path, label_path=None, iou_threshold=0.5):
     # Baca gambar
     img = cv2.imread(img_path)
     img_h, img_w = img.shape[:2]
 
-    # Load dan denormalisasi bounding box ground truth
-    gt_boxes_norm = load_yolo_labels(label_path)
-    gt_boxes = denormalize_boxes(gt_boxes_norm, img_w, img_h)
+    # Coba load GT jika disediakan
+    gt_boxes = []
+    has_gt = label_path is not None and os.path.exists(label_path)
+    if has_gt:
+        gt_boxes_norm = load_yolo_labels(label_path)
+        gt_boxes = denormalize_boxes(gt_boxes_norm, img_w, img_h)
 
     # Load semua model [(model, model_name), ...]
     models = load_models()
 
-    # Buat copy untuk gambar GT dan gambarkan bounding box hijau
-    img_gt = img.copy()
-    draw_boxes(img_gt, gt_boxes, (0,255,0))
-
-    # Buat folder output berdasarkan nama file gambar (tanpa ekstensi)
+    # Buat folder output berdasarkan nama file gambar
     base_img_name = os.path.splitext(os.path.basename(img_path))[0]
     output_dir = os.path.join("images", "output", base_img_name)
     os.makedirs(output_dir, exist_ok=True)
 
-    # Simpan gambar ground truth
-    gt_path = os.path.join(output_dir, "ground_truth.jpg")
-    cv2.imwrite(gt_path, img_gt)
+    # Simpan gambar ground truth jika tersedia
+    if has_gt:
+        img_gt = img.copy()
+        draw_boxes(img_gt, gt_boxes, (0,255,0))
+        gt_path = os.path.join(output_dir, "ground_truth.jpg")
+        cv2.imwrite(gt_path, img_gt)
+    else:
+        gt_path = None  # Tidak ada GT
 
     stats_all = []
 
@@ -208,54 +212,38 @@ def run_inference_img(img_path, label_path, iou_threshold=0.5):
             x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
             pred_boxes.append([int(x1), int(y1), int(x2), int(y2)])
 
-        matched_gt, matched_pred, false_positives, false_negatives = match_boxes(pred_boxes, gt_boxes, iou_threshold)
+        if has_gt:
+            matched_gt, matched_pred, false_positives, false_negatives = match_boxes(pred_boxes, gt_boxes, iou_threshold)
 
-        draw_boxes(img_pred, [gt_boxes[i] for i in matched_gt], (0,255,0))
-        draw_boxes(img_pred, false_positives, (0,0,255))
-        draw_boxes(img_pred, false_negatives, (255,0,0))
+            draw_boxes(img_pred, [gt_boxes[i] for i in matched_gt], (0,255,0))     # TP: hijau
+            draw_boxes(img_pred, false_positives, (0,0,255))                      # FP: merah
+            draw_boxes(img_pred, false_negatives, (255,0,0))                      # FN: biru
 
-        # Simpan gambar hasil inferensi tiap model dengan nama modelnya
+            total_pred = len(pred_boxes)
+            percentage_error = abs((total_pred - len(gt_boxes)) / len(gt_boxes)) * 100 if len(gt_boxes) > 0 else 0
+
+            stats = {
+                "model": model_name,
+                "True Positives": len(matched_gt),
+                "False Positives": len(false_positives),
+                "False Negatives": len(false_negatives),
+                "Jumlah Aktual": len(gt_boxes),
+                "Jumlah Prediksi (TP + FP)": total_pred,
+                "Percentage Error (%)": round(percentage_error, 2)
+            }
+        else:
+            # Tanpa GT, hanya tampilkan jumlah prediksi
+            draw_boxes(img_pred, pred_boxes, (0, 255, 0))  # Semua prediksi: kuning
+
+            stats = {
+                "model": model_name,
+                "Jumlah Prediksi": len(pred_boxes)
+            }
+
         pred_path = os.path.join(output_dir, f"{model_name}.jpg")
         cv2.imwrite(pred_path, img_pred)
 
-        total_pred = len(pred_boxes)
-        percentage_error = abs((total_pred - len(gt_boxes)) / len(gt_boxes)) * 100 if len(gt_boxes) > 0 else 0
-
-        stats = {
-            "model": model_name,
-            "True Positives": len(matched_gt),
-            "False Positives": len(false_positives),
-            "False Negatives": len(false_negatives),
-            "Jumlah Aktual": len(gt_boxes),
-            "Jumlah Prediksi": total_pred,
-            "Percentage Error (%)": round(percentage_error, 2)
-        }
         stats_all.append(stats)
-    
-    total_gt = len(gt_boxes)
 
+    total_gt = len(gt_boxes) if has_gt else None
     return gt_path, output_dir, stats_all, total_gt
-
-# def show_inference_results(img_gt, imgs_preds, model_names):
-#     n_models = len(imgs_preds)
-#     cols = 3
-#     rows = (n_models + cols - 1) // cols  # hitung jumlah baris
-
-#     st.markdown("### Foto Ground Truth")
-#     gt_col1, gt_col2, gt_col3 = st.columns(3)
-#     with gt_col2:
-#         img_gt_rgb = cv2.cvtColor(img_gt, cv2.COLOR_BGR2RGB)
-#         st.image(img_gt_rgb, caption="Ground Truth", use_container_width=True)
-
-#     st.markdown("### Hasil Inferensi Model")
-
-#     idx = 0
-#     for r in range(rows):
-#         row_cols = st.columns(cols)
-#         for c in range(cols):
-#             if idx >= n_models:
-#                 break
-#             with row_cols[c]:
-#                 img_rgb = cv2.cvtColor(imgs_preds[idx], cv2.COLOR_BGR2RGB)
-#                 st.image(img_rgb, caption=model_names[idx], use_container_width=True)
-#             idx += 1
