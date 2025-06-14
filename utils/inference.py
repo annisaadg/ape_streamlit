@@ -206,8 +206,10 @@ def run_inference_img(img_path, label_path, iou_threshold=0.5):
         pred_boxes = []
         boxes = results[0].boxes
         for box in boxes:
-            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
-            pred_boxes.append([int(x1), int(y1), int(x2), int(y2)])
+            conf = box.conf[0].cpu().item()
+            if conf >= iou_threshold:
+                x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+                pred_boxes.append([int(x1), int(y1), int(x2), int(y2)])
 
         matched_gt, matched_pred, false_positives, false_negatives = match_boxes(pred_boxes, gt_boxes, iou_threshold)
 
