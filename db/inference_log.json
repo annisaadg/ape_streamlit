@@ -1,12 +1,5 @@
 [
   {
-<<<<<<< Updated upstream
-    "video": "jeruk12.mov",
-    "model": "M1-C2PSS.pt",
-    "output": "M1-C2PSS_jeruk12.mov",
-    "total_objects": 12,
-    "avg_fps": 8.74
-=======
     "video": "10.mov",
     "model": "Baseline.pt",
     "output": "Baseline_10.mov",
@@ -152,6 +145,5 @@
     "output": "C2PSS+SODL_DySample+FRM+SPPFELAN_11.mov",
     "total_objects": 10,
     "avg_fps": 8.39
->>>>>>> Stashed changes
   }
 ]
