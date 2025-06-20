@@ -106,16 +106,22 @@ def run():
             label_path_input = label_path if label_path and os.path.exists(label_path) else None
             gt_path, output_dir, stats_all, total_gt = run_inference_img(img_path, label_path_input)
 
-            # 🔻 Hapus file gambar dan label setelah inferensi
+           # 🔻 Hapus file gambar dan label setelah inferensi
             try:
-                for f in os.listdir(UPLOAD_DIR_IMG):
-                    file_path = os.path.join(UPLOAD_DIR_IMG, f)
-                    if os.path.isfile(file_path):
-                        os.remove(file_path)
-                for f in os.listdir(UPLOAD_DIR_LABEL):
-                    file_path = os.path.join(UPLOAD_DIR_LABEL, f)
-                    if os.path.isfile(file_path):
-                        os.remove(file_path)
+                # Hapus gambar
+                if os.path.exists(UPLOAD_DIR_IMG):
+                    for f in os.listdir(UPLOAD_DIR_IMG):
+                        file_path = os.path.join(UPLOAD_DIR_IMG, f)
+                        if os.path.isfile(file_path):
+                            os.remove(file_path)
+                
+                # Hapus label jika foldernya ada
+                if os.path.exists(UPLOAD_DIR_LABEL):
+                    for f in os.listdir(UPLOAD_DIR_LABEL):
+                        file_path = os.path.join(UPLOAD_DIR_LABEL, f)
+                        if os.path.isfile(file_path):
+                            os.remove(file_path)
+
                 st.info("📂 Semua file unggahan telah dihapus setelah inferensi.")
             except Exception as e:
                 st.warning(f"⚠️ Gagal menghapus file di folder upload: {e}")

@@ -235,7 +235,7 @@ def run_inference_img(img_path, label_path=None, iou_threshold=0.5):
                 "Percentage Error (%)": round(percentage_error, 2)
             }
         else:
-            draw_boxes(img_pred, pred_boxes, (0, 255, 0))  # Tanpa GT: semua hijau
+            draw_boxes(img_pred, pred_boxes, (255, 0, 0))  # Tanpa GT: semua hijau
             stats = {
                 "model": model_name,
                 "Jumlah Prediksi": len(pred_boxes)
