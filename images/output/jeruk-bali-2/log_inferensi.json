@@ -1,0 +1,70 @@
+{
+    "timestamp": "2025-06-16T14:01:40.507092",
+    "total_ground_truth": null,
+    "results": [
+        {
+            "model": "M4-SPPFELAN.pt",
+            "Jumlah Prediksi": 3
+        },
+        {
+            "model": "C1-C2PSS+SODL_DySample.pt",
+            "Jumlah Prediksi": 4
+        },
+        {
+            "model": "C10-SODL_DySample+FRM+SPPFELAN.pt",
+            "Jumlah Prediksi": 5
+        },
+        {
+            "model": "C7-C2PSS+SODL_DySample+FRM.pt",
+            "Jumlah Prediksi": 4
+        },
+        {
+            "model": "C9-C2PSS+FRM+SPPFELAN.pt",
+            "Jumlah Prediksi": 4
+        },
+        {
+            "model": "C8-C2PSS+SODL_DySample+SPPFELAN.pt",
+            "Jumlah Prediksi": 5
+        },
+        {
+            "model": "C2-C2PSS+FRM.pt",
+            "Jumlah Prediksi": 4
+        },
+        {
+            "model": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
+            "Jumlah Prediksi": 5
+        },
+        {
+            "model": "C5-SODL_DySample+SPPFELAN.pt",
+            "Jumlah Prediksi": 5
+        },
+        {
+            "model": "Baseline.pt",
+            "Jumlah Prediksi": 4
+        },
+        {
+            "model": "M3-FRM.pt",
+            "Jumlah Prediksi": 4
+        },
+        {
+            "model": "C6-FRM+SPPFELAN.pt",
+            "Jumlah Prediksi": 3
+        },
+        {
+            "model": "C3-C2PSS+SPPFELAN.pt",
+            "Jumlah Prediksi": 5
+        },
+        {
+            "model": "M1-C2PSS.pt",
+            "Jumlah Prediksi": 4
+        },
+        {
+            "model": "C4-SODL_DySample+FRM.pt",
+            "Jumlah Prediksi": 3
+        },
+        {
+            "model": "M2-SODL_DySample.pt",
+            "Jumlah Prediksi": 3
+        }
+    ]
+}
