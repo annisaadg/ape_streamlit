@@ -1,0 +1,8 @@
+Gambar berukuran 750x500 pixels. Diambil dari https://megapolitan.kompas.com/read/2019/10/16/09243851/anies-klaim-tingkat-kemacetan-jakarta-pada-2018-menurun-dibandingkan-2017 
+
+
+Model yang berhasil mendeteksi 0 FP adalah Baseline, M1, M2, M3, M4, C4, C8, C9, dan C10. Model lainnya mendeteksi sedikit FP (1-2 FP). Hal ini menunjukkan bahwa:
+
+1. Spurious correlation (korelasi palsu yang dipelajari model antara fitur gambar yang tidak relevan dengan objek target) masih terjadi pada beberapa model modifikasi.
+
+2. Kemungkinan, saat melihat gambar kendaraan di jalan, model salah deteksi kendaraan sebagai jeruk dekopon karena menganggap latar jalan sebagai ciri khas jeruk. Hal ini terjadi karena model belajar dari konteks, bukan objek.
