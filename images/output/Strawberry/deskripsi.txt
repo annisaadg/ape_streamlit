@@ -4,11 +4,11 @@ Strawberry memiliki bentuk kerucut kecil, warna merah mencolok, dan tidak tumbuh
 
 Sebagian besar model menunjukkan performa baik
 
-1. Model C10, M3, dan C4 tidak menghasilkan false positive sama sekali. 
+1. Model C10, M03, dan C04 tidak menghasilkan false positive sama sekali.
 
-2. Model C1, C3, C5, C6, C7, C8, C9, dan M1 hanya menghasilkan 1–2 false positive, menunjukkan sensitivitas masih terkendali.
+2. Model C01, C03, C05, C06, C07, C08, C09, dan M01 hanya menghasilkan 1–2 false positive, menunjukkan sensitivitas masih terkendali.
 
-3. Model C2 mencatat 9 false positive, tertinggi dari semua model, menunjukkan bahwa kombinasi C2PSS dan FRM dalam model ini terlalu sensitif terhadap objek kecil berwarna terang. 
+3. Model C02 mencatat 9 false positive, tertinggi dari semua model, menunjukkan bahwa kombinasi C2PSS dan FRM dalam model ini terlalu sensitif terhadap objek kecil berwarna terang.
 
 4. Model C11 dan baseline juga menunjukkan performa yang kurang optimal dengan masing-masing menghasilkan 4 dan 3 false positive.
 

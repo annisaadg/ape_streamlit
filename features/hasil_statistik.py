@@ -12,7 +12,18 @@ def run():
         st.warning("⚠️ Folder output tidak ditemukan.")
         return
 
-    folder_names = sorted([f for f in os.listdir(base_output_dir) if os.path.isdir(os.path.join(base_output_dir, f))])
+    # Folder yang tersedia di direktori output
+    available_folders = [f for f in os.listdir(base_output_dir) if os.path.isdir(os.path.join(base_output_dir, f))]
+
+    # Urutan folder yang diinginkan
+    custom_order = ['baseline', 'm01', 'm02', 'm03', 'm04'] + [f'c{i:02}' for i in range(1, 12)]
+
+    # Urutkan folder sesuai urutan kustom
+    folder_names = [f for f in custom_order if f in available_folders]
+
+    # Tambahkan folder lain yang tidak ada dalam custom_order
+    other_folders = sorted([f for f in available_folders if f not in custom_order])
+    folder_names += other_folders
 
     if not folder_names:
         st.info("📂 Belum ada hasil inferensi yang tersimpan.")
@@ -39,7 +50,7 @@ def run():
                         except Exception as e:
                             st.warning(f"Gagal membuka gambar: {img_file} ({e})")
 
-        # Tabel hasil inferensi
+        # Tampilkan log hasil inferensi
         log_path = os.path.join(folder_path, "log_inferensi.json")
         if os.path.exists(log_path):
             try:
@@ -52,7 +63,7 @@ def run():
             except Exception as e:
                 st.error(f"Gagal membaca log inferensi: {e}")
 
-        # Deskripsi (dipindah ke bawah setelah tabel)
+        # Tampilkan atau tulis deskripsi
         st.markdown("### 📝 Deskripsi")
         deskripsi_path = os.path.join(folder_path, "deskripsi.txt")
         if os.path.exists(deskripsi_path):

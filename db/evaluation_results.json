@@ -8,7 +8,7 @@
       "params": 2590035
     },
     {
-      "model_name": "M1-C2PSS.pt",
+      "model_name": "M01-C2PSS.pt",
       "precision": 0.8335013205521624,
       "recall": 0.6505330893682002,
       "map50": 0.7557926950181841,
@@ -16,7 +16,7 @@
       "params": 2770899
     },
     {
-      "model_name": "M2-SODL_DySample.pt",
+      "model_name": "M02-SODL_DySample.pt",
       "precision": 0.821498598331677,
       "recall": 0.682153134390168,
       "map50": 0.777594472820458,
@@ -24,7 +24,7 @@
       "params": 2681252
     },
     {
-    "model_name": "M3-FRM.pt",
+    "model_name": "M03-FRM.pt",
     "precision": 0.8215608855506176,
     "recall": 0.6777689337409661,
     "map50": 0.767454149953199,
@@ -32,7 +32,7 @@
     "params": 5487639
   },
   {
-    "model_name": "M4-SPPFELAN.pt",
+    "model_name": "M04-SPPFELAN.pt",
     "precision": 0.848209819703299,
     "recall": 0.663757418224287,
     "map50": 0.764362990711856,
@@ -40,7 +40,7 @@
     "params": 2837331
   },
   {
-    "model_name": "C1-C2PSS+SODL_DySample.pt",
+    "model_name": "C01-C2PSS+SODL_DySample.pt",
     "precision": 0.8253626151967112,
     "recall": 0.7076142131979696,
     "map50": 0.7907453627235822,
@@ -48,7 +48,7 @@
     "params": 2862116
   },
   {
-    "model_name": "C2-C2PSS+FRM.pt",
+    "model_name": "C02-C2PSS+FRM.pt",
     "precision": 0.8575145605623365,
     "recall": 0.6680203045685279,
     "map50": 0.7686387817218758,
@@ -56,7 +56,7 @@
     "params": 5668503
   },
   {
-    "model_name": "C3-C2PSS+SPPFELAN.pt",
+    "model_name": "C03-C2PSS+SPPFELAN.pt",
     "precision": 0.853104186767866,
     "recall": 0.646700507614213,
     "map50": 0.758623556271599,
@@ -64,7 +64,7 @@
     "params": 3018195
   },
   {
-    "model_name": "C4-SODL_DySample+FRM.pt",
+    "model_name": "C04-SODL_DySample+FRM.pt",
     "precision": 0.8057913901919453,
     "recall": 0.7245135578054909,
     "map50": 0.8008248813877887,
@@ -72,7 +72,7 @@
     "params": 4232808
   },
   {
-    "model_name": "C5-SODL_DySample+SPPFELAN.pt",
+    "model_name": "C05-SODL_DySample+SPPFELAN.pt",
     "precision": 0.833978454936568,
     "recall": 0.686294416243654,
     "map50": 0.784681245246016,
@@ -80,7 +80,7 @@
     "params": 2928548
   },
   {
-    "model_name": "C6-FRM+SPPFELAN.pt",
+    "model_name": "C06-FRM+SPPFELAN.pt",
     "precision": 0.834903341495569,
     "recall": 0.650761421319797,
     "map50": 0.754546431101731,
@@ -88,7 +88,7 @@
     "params": 4388887
   },
   {
-    "model_name": "C7-C2PSS+SODL_DySample+FRM.pt",
+    "model_name": "C07-C2PSS+SODL_DySample+FRM.pt",
     "precision": 0.8146496340718182,
     "recall": 0.7035532994923858,
     "map50": 0.7948164273085623,
@@ -96,7 +96,7 @@
     "params": 4413672
   },
   {
-    "model_name": "C8-C2PSS+SODL_DySample+SPPFELAN.pt",
+    "model_name": "C08-C2PSS+SODL_DySample+SPPFELAN.pt",
     "precision": 0.854924067947545,
     "recall": 0.691370558375634,
     "map50": 0.802106700750674,
@@ -104,7 +104,7 @@
     "params": 3109412
   },
   {
-    "model_name": "C9-C2PSS+FRM+SPPFELAN.pt",
+    "model_name": "C09-C2PSS+FRM+SPPFELAN.pt",
     "precision": 0.863164218197459,
     "recall": 0.644670050761421,
     "map50": 0.758078850439503,

@@ -1,9 +1,9 @@
 Gambar berukuran 480x318 pixels. Diambil dari https://www.medcom.id/otomotif/tips-otomotif/8KyXYXYk-tujuh-kendaraan-yang-mendapatkan-prioritas-di-jalan
 
-1. Beberapa model yang berhasil mendeteksi 0 FP (C4, C7, M3, dan C3). 
+1. Beberapa model yang berhasil mendeteksi 0 FP (C04, C07, M03, dan C03).
 
-2. Selain model yang disebutkan di nomor 1, termasuk model Baseline, masih mendeteksi FP. 
+2. Selain model yang disebutkan di nomor 1, termasuk model Baseline, masih mendeteksi FP.
 
-3. Hal ini menunjukkan bahwa: Spurious correlation (korelasi palsu yang dipelajari model antara fitur gambar yang tidak relevan dengan objek target) masih terjadi pada beberapa model modifikasi, namun salah satu model terbaik (C4) mampu menghindari FP.
+3. Hal ini menunjukkan bahwa: Spurious correlation (korelasi palsu yang dipelajari model antara fitur gambar yang tidak relevan dengan objek target) masih terjadi pada beberapa model modifikasi, namun salah satu model terbaik (C04) mampu menghindari FP.
 
 4. Kemungkinan, saat melihat gambar kendaraan di jalan, model salah deteksi kendaraan sebagai jeruk dekopon karena menganggap latar jalan sebagai ciri khas jeruk. Hal ini terjadi karena model belajar dari konteks, bukan objek.
