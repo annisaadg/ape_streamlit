@@ -1,41 +1,49 @@
 {
-    "timestamp": "2025-06-20T20:02:22.397331",
+    "timestamp": "2025-06-26T15:45:45.040274",
     "total_ground_truth": null,
     "results": [
         {
-            "model": "M4-SPPFELAN.pt",
+            "model": "C06-FRM+SPPFELAN.pt",
             "Jumlah Prediksi": 6
         },
         {
-            "model": "C1-C2PSS+SODL_DySample.pt",
+            "model": "C04-SODL_DySample+FRM.pt",
             "Jumlah Prediksi": 5
+        },
+        {
+            "model": "C02-C2PSS+FRM.pt",
+            "Jumlah Prediksi": 7
         },
         {
             "model": "C10-SODL_DySample+FRM+SPPFELAN.pt",
             "Jumlah Prediksi": 5
         },
         {
-            "model": "C7-C2PSS+SODL_DySample+FRM.pt",
+            "model": "C01-C2PSS+SODL_DySample.pt",
+            "Jumlah Prediksi": 5
+        },
+        {
+            "model": "M02-SODL_DySample.pt",
             "Jumlah Prediksi": 6
         },
         {
-            "model": "C9-C2PSS+FRM+SPPFELAN.pt",
+            "model": "M01-C2PSS.pt",
             "Jumlah Prediksi": 5
         },
         {
-            "model": "C8-C2PSS+SODL_DySample+SPPFELAN.pt",
+            "model": "C03-C2PSS+SPPFELAN.pt",
             "Jumlah Prediksi": 5
         },
         {
-            "model": "C2-C2PSS+FRM.pt",
-            "Jumlah Prediksi": 7
+            "model": "C05-SODL_DySample+SPPFELAN.pt",
+            "Jumlah Prediksi": 5
         },
         {
             "model": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
             "Jumlah Prediksi": 6
         },
         {
-            "model": "C5-SODL_DySample+SPPFELAN.pt",
+            "model": "C09-C2PSS+FRM+SPPFELAN.pt",
             "Jumlah Prediksi": 5
         },
         {
@@ -43,28 +51,20 @@
             "Jumlah Prediksi": 6
         },
         {
-            "model": "M3-FRM.pt",
-            "Jumlah Prediksi": 5
-        },
-        {
-            "model": "C6-FRM+SPPFELAN.pt",
+            "model": "C07-C2PSS+SODL_DySample+FRM.pt",
             "Jumlah Prediksi": 6
         },
         {
-            "model": "C3-C2PSS+SPPFELAN.pt",
+            "model": "C08-C2PSS+SODL_DySample+SPPFELAN.pt",
             "Jumlah Prediksi": 5
         },
         {
-            "model": "M1-C2PSS.pt",
-            "Jumlah Prediksi": 5
-        },
-        {
-            "model": "C4-SODL_DySample+FRM.pt",
-            "Jumlah Prediksi": 5
-        },
-        {
-            "model": "M2-SODL_DySample.pt",
+            "model": "M04-SPPFELAN.pt",
             "Jumlah Prediksi": 6
+        },
+        {
+            "model": "M03-FRM.pt",
+            "Jumlah Prediksi": 5
         }
     ]
 }

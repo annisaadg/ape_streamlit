@@ -1,3 +1,4 @@
+import re
 import streamlit as st
 import os
 import pandas as pd
@@ -38,8 +39,16 @@ def run():
             st.error("❌ Ukuran file melebihi 200MB!")
             return
 
-    model_names = [f for f in os.listdir("models") if f.endswith(".pt")]
-    selected_model = st.selectbox("Pilih Model YOLO11", model_names)
+    custom_order = ['baseline'] + [f'm{str(i).zfill(2)}' for i in range(1, 5)] + [f'c{str(i).zfill(2)}' for i in range(1, 12)]
+    available_models = [f[:-3] for f in os.listdir("models") if f.endswith(".pt")]
+    
+    def extract_prefix(name):
+        match = re.match(r'([a-z]+[0-9]*)', name.lower())
+        return match.group(1) if match else name.lower()
+    
+    sorted_models = sorted(available_models, key=lambda x: custom_order.index(extract_prefix(x)) if extract_prefix(x) in custom_order else 999)
+    selected_model = st.selectbox("📦 Pilih Model YOLO11", [f"{m}.pt" for m in sorted_models])
+
 
     if st.button("Jalankan Inferensi Video"):
         if not video_path or not selected_model:
@@ -145,7 +154,7 @@ def run():
                 st.image(gt_path, caption="Ground Truth")
 
             # Urutkan dan tampilkan gambar model
-            custom_order = ['baseline', 'm1', 'm2', 'm3', 'm4'] + [f'c{i}' for i in range(1, 12)]
+            custom_order = ['baseline', 'm01', 'm02', 'm03', 'm04'] + [f'c{i:02}' for i in range(1, 12)]
 
             def extract_prefix(filename):
                 import re
