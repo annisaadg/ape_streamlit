@@ -1,3 +1,0 @@
-Gambar berukuran 630x380 pixels. Diambil dari https://info.ft.uns.ac.id/tanaman-jeruk-bali.html 
-
-Pada sample pertama, model baseline, M2 (SODL) mendeteksi 9 false positive, sedangkan model lainnya mendeteksi lebih banyak false positive (10-14). Model yang menghasilkan false positive terbanyak adalah C7 (C2PSS+SODL_DySample+FRM), yaitu 14 false positive. 

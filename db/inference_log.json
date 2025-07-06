@@ -1,226 +1,338 @@
 [
-  {
-    "video": "11.mov",
+      {
+    "video": "Video1.mov",
     "model": "Baseline.pt",
-    "output": "Baseline_11.mov",
-    "total_objects": 8,
-    "avg_fps": 15.73
+    "output": "Baseline_Video1.mov",
+    "total_objects": 7,
+    "avg_fps": 23.38
   },
   {
-    "video": "11.mov",
+    "video": "Video1.mov",
     "model": "M1-C2PSS.pt",
-    "output": "M1-C2PSS_11.mov",
-    "total_objects": 9,
-    "avg_fps": 17.12
+    "output": "M1-C2PSS_Video1.mov",
+    "total_objects": 8,
+    "avg_fps": 25.32
   },
   {
-    "video": "11.mov",
+    "video": "Video1.mov",
     "model": "M2-SODL_DySample.pt",
-    "output": "M2-SODL_DySample_11.mov",
-    "total_objects": 11,
-    "avg_fps": 12.24
+    "output": "M2-SODL_DySample_Video1.mov",
+    "total_objects": 10,
+    "avg_fps": 24.31
   },
   {
-    "video": "11.mov",
+    "video": "Video1.mov",
     "model": "M3-FRM.pt",
-    "output": "M3-FRM_11.mov",
+    "output": "M3-FRM_Video1.mov",
     "total_objects": 10,
-    "avg_fps": 10.63
+    "avg_fps": 22.08
   },
   {
-    "video": "11.mov",
+    "video": "Video1.mov",
     "model": "M4-SPPFELAN.pt",
-    "output": "M4-SPPFELAN_11.mov",
-    "total_objects": 8,
-    "avg_fps": 14.69
+    "output": "M4-SPPFELAN_Video1.mov",
+    "total_objects": 9,
+    "avg_fps": 19.85
   },
   {
-    "video": "11.mov",
+    "video": "Video1.mov",
     "model": "C1-C2PSS+SODL_DySample.pt",
-    "output": "C1-C2PSS+SODL_DySample_11.mov",
+    "output": "C1-C2PSS+SODL_DySample_Video1.mov",
     "total_objects": 10,
-    "avg_fps": 11.5
+    "avg_fps": 16.42
   },
   {
-    "video": "11.mov",
+    "video": "Video1.mov",
     "model": "C2-C2PSS+FRM.pt",
-    "output": "C2-C2PSS+FRM_11.mov",
-    "total_objects": 12,
-    "avg_fps": 9.19
-  },
-  {
-    "video": "11.mov",
-    "model": "C3-C2PSS+SPPFELAN.pt",
-    "output": "C3-C2PSS+SPPFELAN_11.mov",
-    "total_objects": 7,
-    "avg_fps": 15.69
-  },
-  {
-    "video": "11.mov",
-    "model": "C4-SODL_DySample+FRM.pt",
-    "output": "C4-SODL_DySample+FRM_11.mov",
-    "total_objects": 10,
-    "avg_fps": 8.59
-  },
-  {
-    "video": "11.mov",
-    "model": "C5-SODL_DySample+SPPFELAN.pt",
-    "output": "C5-SODL_DySample+SPPFELAN_11.mov",
-    "total_objects": 9,
-    "avg_fps": 11.05
-  },
-  {
-    "video": "11.mov",
-    "model": "C6-FRM+SPPFELAN.pt",
-    "output": "C6-FRM+SPPFELAN_11.mov",
-    "total_objects": 12,
-    "avg_fps": 10.67
-  },
-  {
-    "video": "11.mov",
-    "model": "C7-C2PSS+SODL_DySample+FRM.pt",
-    "output": "C7-C2PSS+SODL_DySample+FRM_11.mov",
-    "total_objects": 10,
-    "avg_fps": 8.72
-  },
-  {
-    "video": "11.mov",
-    "model": "C8-C2PSS+SODL_DySample+SPPFELAN.pt",
-    "output": "C8-C2PSS+SODL_DySample+SPPFELAN_11.mov",
-    "total_objects": 10,
-    "avg_fps": 11.82
-  },
-  {
-    "video": "11.mov",
-    "model": "C9-C2PSS+FRM+SPPFELAN.pt",
-    "output": "C9-C2PSS+FRM+SPPFELAN_11.mov",
-    "total_objects": 11,
-    "avg_fps": 10.34
-  },
-  {
-    "video": "11.mov",
-    "model": "C10-SODL_DySample+FRM+SPPFELAN.pt",
-    "output": "C10-SODL_DySample+FRM+SPPFELAN_11.mov",
+    "output": "C2-C2PSS+FRM_Video1.mov",
     "total_objects": 13,
-    "avg_fps": 8.74
+    "avg_fps": 23.69
   },
   {
-    "video": "11.mov",
-    "model": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
-    "output": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN_11.mov",
+    "video": "Video1.mov",
+    "model": "C3-C2PSS+SPPFELAN.pt",
+    "output": "C3-C2PSS+SPPFELAN_Video1.mov",
     "total_objects": 9,
-    "avg_fps": 8.1
+    "avg_fps": 25.04
   },
   {
-    "video": "10.mov",
-    "model": "Baseline.pt",
-    "output": "Baseline_10.mov",
-    "total_objects": 7,
-    "avg_fps": 16.41
-  },
-  {
-    "video": "10.mov",
-    "model": "M1-C2PSS.pt",
-    "output": "M1-C2PSS_10.mov",
+    "video": "Video1.mov",
+    "model": "C4-SODL_DySample+FRM.pt",
+    "output": "C4-SODL_DySample+FRM_Video1.mov",
     "total_objects": 8,
+    "avg_fps": 20.86
+  },
+  {
+    "video": "Video1.mov",
+    "model": "C5-SODL_DySample+SPPFELAN.pt",
+    "output": "C5-SODL_DySample+SPPFELAN_Video1.mov",
+    "total_objects": 10,
+    "avg_fps": 22.55
+  },
+  {
+    "video": "Video1.mov",
+    "model": "C6-FRM+SPPFELAN.pt",
+    "output": "C6-FRM+SPPFELAN_Video1.mov",
+    "total_objects": 7,
+    "avg_fps": 24.28
+  },
+  {
+    "video": "Video1.mov",
+    "model": "C7-C2PSS+SODL_DySample+FRM.pt",
+    "output": "C7-C2PSS+SODL_DySample+FRM_Video1.mov",
+    "total_objects": 8,
+    "avg_fps": 22.55
+  },
+  {
+    "video": "Video1.mov",
+    "model": "C8-C2PSS+SODL_DySample+SPPFELAN.pt",
+    "output": "C8-C2PSS+SODL_DySample+SPPFELAN_Video1.mov",
+    "total_objects": 11,
+    "avg_fps": 23.0
+  },
+  {
+    "video": "Video1.mov",
+    "model": "C9-C2PSS+FRM+SPPFELAN.pt",
+    "output": "C9-C2PSS+FRM+SPPFELAN_Video1.mov",
+    "total_objects": 10,
+    "avg_fps": 23.82
+  },
+  {
+    "video": "Video1.mov",
+    "model": "C10-SODL_DySample+FRM+SPPFELAN.pt",
+    "output": "C10-SODL_DySample+FRM+SPPFELAN_Video1.mov",
+    "total_objects": 8,
+    "avg_fps": 21.88
+  },
+  {
+    "video": "Video1.mov",
+    "model": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
+    "output": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN_Video1.mov",
+    "total_objects": 8,
+    "avg_fps": 21.32
+  },
+    {
+    "video": "Video2.mov",
+    "model": "Baseline.pt",
+    "output": "Baseline_Video2.mov",
+    "total_objects": 8,
+    "avg_fps": 23.79
+  },
+  {
+    "video": "Video2.mov",
+    "model": "M1-C2PSS.pt",
+    "output": "M1-C2PSS_Video2.mov",
+    "total_objects": 9,
+    "avg_fps": 26.47
+  },
+  {
+    "video": "Video2.mov",
+    "model": "M2-SODL_DySample.pt",
+    "output": "M2-SODL_DySample_Video2.mov",
+    "total_objects": 12,
+    "avg_fps": 24.97
+  },
+  {
+    "video": "Video2.mov",
+    "model": "M3-FRM.pt",
+    "output": "M3-FRM_Video2.mov",
+    "total_objects": 10,
+    "avg_fps": 22.13
+  },
+  {
+    "video": "Video2.mov",
+    "model": "M4-SPPFELAN.pt",
+    "output": "M4-SPPFELAN_Video2.mov",
+    "total_objects": 8,
+    "avg_fps": 25.04
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C1-C2PSS+SODL_DySample.pt",
+    "output": "C1-C2PSS+SODL_DySample_Video2.mov",
+    "total_objects": 10,
+    "avg_fps": 23.71
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C2-C2PSS+FRM.pt",
+    "output": "C2-C2PSS+FRM_Video2.mov",
+    "total_objects": 11,
+    "avg_fps": 21.65
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C3-C2PSS+SPPFELAN.pt",
+    "output": "C3-C2PSS+SPPFELAN_Video2.mov",
+    "total_objects": 7,
+    "avg_fps": 21.39
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C4-SODL_DySample+FRM.pt",
+    "output": "C4-SODL_DySample+FRM_Video2.mov",
+    "total_objects": 10,
+    "avg_fps": 17.93
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C5-SODL_DySample+SPPFELAN.pt",
+    "output": "C5-SODL_DySample+SPPFELAN_Video2.mov",
+    "total_objects": 8,
+    "avg_fps": 23.4
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C6-FRM+SPPFELAN.pt",
+    "output": "C6-FRM+SPPFELAN_Video2.mov",
+    "total_objects": 13,
+    "avg_fps": 23.3
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C7-C2PSS+SODL_DySample+FRM.pt",
+    "output": "C7-C2PSS+SODL_DySample+FRM_Video2.mov",
+    "total_objects": 10,
+    "avg_fps": 19.18
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C8-C2PSS+SODL_DySample+SPPFELAN.pt",
+    "output": "C8-C2PSS+SODL_DySample+SPPFELAN_Video2.mov",
+    "total_objects": 10,
+    "avg_fps": 16.55
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C9-C2PSS+FRM+SPPFELAN.pt",
+    "output": "C9-C2PSS+FRM+SPPFELAN_Video2.mov",
+    "total_objects": 10,
+    "avg_fps": 22.74
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C10-SODL_DySample+FRM+SPPFELAN.pt",
+    "output": "C10-SODL_DySample+FRM+SPPFELAN_Video2.mov",
+    "total_objects": 12,
+    "avg_fps": 19.77
+  },
+  {
+    "video": "Video2.mov",
+    "model": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
+    "output": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN_Video2.mov",
+    "total_objects": 10,
     "avg_fps": 16.53
   },
+    {
+    "video": "Jeruk360.mov",
+    "model": "Baseline.pt",
+    "output": "Baseline_Jeruk360.mov",
+    "total_objects": 81,
+    "avg_fps": 13.74
+  },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
+    "model": "M1-C2PSS.pt",
+    "output": "M1-C2PSS_Jeruk360.mov",
+    "total_objects": 78,
+    "avg_fps": 13.9
+  },
+  {
+    "video": "Jeruk360.mov",
     "model": "M2-SODL_DySample.pt",
-    "output": "M2-SODL_DySample_10.mov",
-    "total_objects": 9,
-    "avg_fps": 11.75
+    "output": "M2-SODL_DySample_Jeruk360.mov",
+    "total_objects": 75,
+    "avg_fps": 13.33
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "M3-FRM.pt",
-    "output": "M3-FRM_10.mov",
-    "total_objects": 10,
-    "avg_fps": 11.11
+    "output": "M3-FRM_Jeruk360.mov",
+    "total_objects": 80,
+    "avg_fps": 13.11
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "M4-SPPFELAN.pt",
-    "output": "M4-SPPFELAN_10.mov",
-    "total_objects": 9,
-    "avg_fps": 17.19
+    "output": "M4-SPPFELAN_Jeruk360.mov",
+    "total_objects": 76,
+    "avg_fps": 13.92
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C1-C2PSS+SODL_DySample.pt",
-    "output": "C1-C2PSS+SODL_DySample_10.mov",
-    "total_objects": 10,
-    "avg_fps": 12.25
+    "output": "C1-C2PSS+SODL_DySample_Jeruk360.mov",
+    "total_objects": 76,
+    "avg_fps": 12.2
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C2-C2PSS+FRM.pt",
-    "output": "C2-C2PSS+FRM_10.mov",
-    "total_objects": 12,
-    "avg_fps": 9.1
+    "output": "C2-C2PSS+FRM_Jeruk360.mov",
+    "total_objects": 75,
+    "avg_fps": 11.81
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C3-C2PSS+SPPFELAN.pt",
-    "output": "C3-C2PSS+SPPFELAN_10.mov",
-    "total_objects": 9,
-    "avg_fps": 16.92
+    "output": "C3-C2PSS+SPPFELAN_Jeruk360.mov",
+    "total_objects": 71,
+    "avg_fps": 11.85
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C4-SODL_DySample+FRM.pt",
-    "output": "C4-SODL_DySample+FRM_10.mov",
-    "total_objects": 9,
-    "avg_fps": 9.01
+    "output": "C4-SODL_DySample+FRM_Jeruk360.mov",
+    "total_objects": 76,
+    "avg_fps": 11.67
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C5-SODL_DySample+SPPFELAN.pt",
-    "output": "C5-SODL_DySample+SPPFELAN_10.mov",
-    "total_objects": 10,
-    "avg_fps": 12.61
+    "output": "C5-SODL_DySample+SPPFELAN_Jeruk360.mov",
+    "total_objects": 76,
+    "avg_fps": 12.3
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C6-FRM+SPPFELAN.pt",
-    "output": "C6-FRM+SPPFELAN_10.mov",
-    "total_objects": 7,
-    "avg_fps": 11.09
+    "output": "C6-FRM+SPPFELAN_Jeruk360.mov",
+    "total_objects": 80,
+    "avg_fps": 11.67
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C7-C2PSS+SODL_DySample+FRM.pt",
-    "output": "C7-C2PSS+SODL_DySample+FRM_10.mov",
-    "total_objects": 8,
-    "avg_fps": 9.14
+    "output": "C7-C2PSS+SODL_DySample+FRM_Jeruk360.mov",
+    "total_objects": 77,
+    "avg_fps": 11.6
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C8-C2PSS+SODL_DySample+SPPFELAN.pt",
-    "output": "C8-C2PSS+SODL_DySample+SPPFELAN_10.mov",
-    "total_objects": 11,
-    "avg_fps": 12.18
+    "output": "C8-C2PSS+SODL_DySample+SPPFELAN_Jeruk360.mov",
+    "total_objects": 79,
+    "avg_fps": 13.16
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C9-C2PSS+FRM+SPPFELAN.pt",
-    "output": "C9-C2PSS+FRM+SPPFELAN_10.mov",
-    "total_objects": 10,
-    "avg_fps": 11.06
+    "output": "C9-C2PSS+FRM+SPPFELAN_Jeruk360.mov",
+    "total_objects": 78,
+    "avg_fps": 13.19
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C10-SODL_DySample+FRM+SPPFELAN.pt",
-    "output": "C10-SODL_DySample+FRM+SPPFELAN_10.mov",
-    "total_objects": 8,
-    "avg_fps": 9.2
+    "output": "C10-SODL_DySample+FRM+SPPFELAN_Jeruk360.mov",
+    "total_objects": 80,
+    "avg_fps": 11.66
   },
   {
-    "video": "10.mov",
+    "video": "Jeruk360.mov",
     "model": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN.pt",
-    "output": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN_10.mov",
-    "total_objects": 8,
-    "avg_fps": 9.12
+    "output": "C11-C2PSS+SODL_DySample+FRM+SPPFELAN_Jeruk360.mov",
+    "total_objects": 70,
+    "avg_fps": 11.56
   }
 ]

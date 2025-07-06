@@ -133,38 +133,55 @@ def run():
             except Exception as e:
                 st.warning(f"⚠️ Gagal menghapus file upload: {e}")
 
-            # Tampilkan hasil
-            st.markdown("### Keterangan Bounding Box")
-            st.markdown("""
-            - 🟩 **Hijau**: True Positive  
-            - 🟥 **Merah**: False Positive  
-            - 🟦 **Biru**: False Negative
-            """)
+            # === Tampilkan Ground Truth di tengah ===
+            col1, col2, col3 = st.columns([1, 2, 1])
 
             if gt_path:
-                st.image(gt_path, caption="Ground Truth")
+                # Tampilkan hasil
+                st.markdown("### Keterangan Bounding Box")
+                st.markdown("""
+                - 🟩 **Hijau**: True Positive  
+                - 🟥 **Merah**: False Positive  
+                - 🟦 **Biru**: False Negative
+                """)
+                
+                with col2:
+                    st.markdown(f"### Ground Truth: {total_gt}")
+                    st.image(gt_path, caption="Ground Truth")  # Ukuran disesuaikan
+            else:
+                st.info("📂 Ground truth tidak tersedia. Hanya menampilkan hasil prediksi.")
 
-            # Urutkan dan tampilkan gambar model
+            # === Tampilkan hasil semua model ===
             custom_order = ['baseline', 'm1', 'm2', 'm3', 'm4'] + [f'c{i}' for i in range(1, 12)]
+            model_images = [f for f in os.listdir(output_dir) if f.endswith('.jpg') and f.lower() != 'ground_truth.jpg']
 
             def extract_prefix(filename):
                 import re
                 match = re.match(r'([a-zA-Z]+\d*)', filename.lower())
-                return match.group(1) if match else filename.lower()
+                if match:
+                    return match.group(1)
+                else:
+                    return filename.lower()
 
-            model_images = [f for f in os.listdir(output_dir) if f.endswith('.jpg') and f.lower() != 'ground_truth.jpg']
             model_images.sort(key=lambda x: custom_order.index(extract_prefix(x)) if extract_prefix(x) in custom_order else 999)
-
+            
             num_cols = 4
             for i in range(0, len(model_images), num_cols):
                 cols = st.columns(num_cols)
                 for j in range(num_cols):
                     if i + j < len(model_images):
-                        img_file = model_images[i + j]
-                        img_full_path = os.path.join(output_dir, img_file)
+                        model_img_name = model_images[i + j]
+                        img_full_path = os.path.join(output_dir, model_img_name)
                         with cols[j]:
-                            st.image(img_full_path, caption=img_file.replace(".jpg", ""), use_container_width=True)
+                            st.image(
+                                img_full_path,
+                                caption=model_img_name.replace(".jpg", ""),
+                                use_container_width=True
+                            )
 
+            # Tampilkan stats
             st.header("📋 Tabel Hasil Inferensi")
             stats_all.sort(key=lambda d: custom_order.index(extract_prefix(d['model'])) if extract_prefix(d['model']) in custom_order else 999)
+
             st.dataframe(pd.DataFrame(stats_all))
+    

@@ -2,7 +2,6 @@ import cv2
 from ultralytics import solutions, YOLO
 import os
 import time
-import numpy as np
 import streamlit as st
 
 def run_inference(video_path, model_path, output_dir):
@@ -91,6 +90,17 @@ def run_inference(video_path, model_path, output_dir):
 
 ######## INFERENCE FOTO ########
 
+# Fungsi untuk load semua model dari folder models/
+@st.cache_resource
+def load_models():
+    model_names = [f for f in os.listdir("models") if f.endswith(".pt")]
+    models = []
+    for name in model_names:
+        model_path = os.path.join("models", name)
+        model = YOLO(model_path)
+        models.append((model, name))  # return tuple, bukan cuma model
+    return models
+
 def load_yolo_labels(label_path):
     """Membaca file label YOLO dan mengembalikan bounding box dalam format [x1,y1,x2,y2]"""
     boxes = []
@@ -119,8 +129,22 @@ def denormalize_boxes(boxes, img_w, img_h):
         denorm_boxes.append([x1_px, y1_px, x2_px, y2_px])
     return denorm_boxes
 
+# def compute_iou(boxA, boxB):
+#     # Hitung intersection
+#     xA = max(boxA[0], boxB[0])
+#     yA = max(boxA[1], boxB[1])
+#     xB = min(boxA[2], boxB[2])
+#     yB = min(boxA[3], boxB[3])
+#     interArea = max(0, xB - xA) * max(0, yB - yA)
+#     if interArea == 0:
+#         return 0.0
+#     # Hitung union
+#     boxAArea = (boxA[2] - boxA[0]) * (boxA[3] - boxA[1])
+#     boxBArea = (boxB[2] - boxB[0]) * (boxB[3] - boxB[1])
+#     iou = interArea / float(boxAArea + boxBArea - interArea)
+#     return iou
+
 def compute_iou(boxA, boxB):
-    # Hitung intersection
     xA = max(boxA[0], boxB[0])
     yA = max(boxA[1], boxB[1])
     xB = min(boxA[2], boxB[2])
@@ -128,35 +152,113 @@ def compute_iou(boxA, boxB):
     interArea = max(0, xB - xA) * max(0, yB - yA)
     if interArea == 0:
         return 0.0
-    # Hitung union
     boxAArea = (boxA[2] - boxA[0]) * (boxA[3] - boxA[1])
     boxBArea = (boxB[2] - boxB[0]) * (boxB[3] - boxB[1])
-    iou = interArea / float(boxAArea + boxBArea - interArea)
-    return iou
+    return interArea / float(boxAArea + boxBArea - interArea)
 
-def match_boxes(pred_boxes, gt_boxes, iou_threshold=0.5):
+
+# def match_boxes(pred_boxes, gt_boxes, iou_threshold=0.5):
+#     """
+#     Mencocokkan prediksi dengan ground truth menggunakan greedy matching (satu kelas).
+#     Mengembalikan indeks matched TP, daftar FP dan FN boxes.
+#     """
+
+#     matched_gt = set()
+#     matched_pred = set()
+
+#     # Simpan pasangan pred-gt terbaik
+#     matches = []
+
+#     for pred_idx, pred_box in enumerate(pred_boxes):
+#         best_iou = 0
+#         best_gt_idx = -1
+#         for gt_idx, gt_box in enumerate(gt_boxes):
+#             if gt_idx in matched_gt:
+#                 continue
+#             iou = compute_iou(pred_box, gt_box)
+#             if iou >= iou_threshold and iou > best_iou:
+#                 best_iou = iou
+#                 best_gt_idx = gt_idx
+
+#         if best_gt_idx != -1:
+#             matched_pred.add(pred_idx)
+#             matched_gt.add(best_gt_idx)
+#             matches.append((pred_idx, best_gt_idx))
+
+#     tp_boxes = [pred_boxes[i] for i, _ in matches]
+#     fp_boxes = [pred_boxes[i] for i in range(len(pred_boxes)) if i not in matched_pred]
+#     fn_boxes = [gt_boxes[i] for i in range(len(gt_boxes)) if i not in matched_gt]
+
+#     return tp_boxes, fp_boxes, fn_boxes
+
+# def match_boxes(pred_boxes, gt_boxes, confidences, iou_threshold=0.5):
+#     """
+#     Mencocokkan prediksi dengan ground truth menggunakan greedy matching berbasis confidence.
+#     Mengembalikan daftar TP, FP, dan FN boxes.
+#     """
+
+#     # Urutkan prediksi berdasarkan confidence tertinggi ke rendah
+#     sorted_indices = sorted(range(len(confidences)), key=lambda i: -confidences[i])
+    
+#     matched_gt = set()
+#     matched_pred = set()
+#     matches = []
+
+#     for pred_idx in sorted_indices:
+#         pred_box = pred_boxes[pred_idx]
+#         best_iou = 0
+#         best_gt_idx = -1
+
+#         for gt_idx, gt_box in enumerate(gt_boxes):
+#             if gt_idx in matched_gt:
+#                 continue
+#             iou = compute_iou(pred_box, gt_box)
+#             if iou >= iou_threshold and iou > best_iou:
+#                 best_iou = iou
+#                 best_gt_idx = gt_idx
+
+#         if best_gt_idx != -1:
+#             matched_pred.add(pred_idx)
+#             matched_gt.add(best_gt_idx)
+#             matches.append((pred_idx, best_gt_idx))
+
+#     tp_boxes = [pred_boxes[i] for i, _ in matches]
+#     fp_boxes = [pred_boxes[i] for i in range(len(pred_boxes)) if i not in matched_pred]
+#     fn_boxes = [gt_boxes[i] for i in range(len(gt_boxes)) if i not in matched_gt]
+
+#     return tp_boxes, fp_boxes, fn_boxes
+
+def match_boxes(pred_boxes, gt_boxes, confidences, iou_threshold=0.5):
+    sorted_indices = sorted(range(len(confidences)), key=lambda i: -confidences[i])
     matched_gt = set()
-    matched_pred = set()
+    matches = []
 
-    for gt_idx, gt_box in enumerate(gt_boxes):
+    for pred_idx in sorted_indices:
+        pred_box = pred_boxes[pred_idx]
         best_iou = 0
-        best_pred_idx = -1
-        for pred_idx, pred_box in enumerate(pred_boxes):
-            if pred_idx in matched_pred:
+        best_gt_idx = -1
+
+        for gt_idx, gt_box in enumerate(gt_boxes):
+            if gt_idx in matched_gt:
                 continue
             iou = compute_iou(pred_box, gt_box)
             if iou >= iou_threshold and iou > best_iou:
                 best_iou = iou
-                best_pred_idx = pred_idx
+                best_gt_idx = gt_idx
 
-        if best_pred_idx != -1:
-            matched_gt.add(gt_idx)
-            matched_pred.add(best_pred_idx)
+        if best_gt_idx != -1:
+            matched_gt.add(best_gt_idx)
+            matches.append((pred_idx, best_gt_idx))
 
-    false_positives = [pred_boxes[i] for i in range(len(pred_boxes)) if i not in matched_pred]
-    false_negatives = [gt_boxes[i] for i in range(len(gt_boxes)) if i not in matched_gt]
+    matched_pred = set([pred for pred, _ in matches])
+    matched_gt_set = set([gt for _, gt in matches])
 
-    return matched_gt, matched_pred, false_positives, false_negatives
+    tp_boxes = [pred_boxes[i] for i in matched_pred]
+    fp_boxes = [pred_boxes[i] for i in range(len(pred_boxes)) if i not in matched_pred]
+    fn_boxes = [gt_boxes[i] for i in range(len(gt_boxes)) if i not in matched_gt_set]
+
+    return tp_boxes, fp_boxes, fn_boxes
+
 
 def draw_boxes(img, boxes, color, label=None, thickness=2):
     for box in boxes:
@@ -165,22 +267,11 @@ def draw_boxes(img, boxes, color, label=None, thickness=2):
         if label:
             cv2.putText(img, label, (x1, y1-5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
 
-# Fungsi untuk load semua model dari folder models/
-@st.cache_resource
-def load_models():
-    model_names = [f for f in os.listdir("models") if f.endswith(".pt")]
-    models = []
-    for name in model_names:
-        model_path = os.path.join("models", name)
-        model = YOLO(model_path)
-        models.append((model, name))  # return tuple, bukan cuma model
-    return models
 
 def run_inference_img(img_path, label_path=None, iou_threshold=0.5):
     img = cv2.imread(img_path)
     img_h, img_w = img.shape[:2]
 
-    # Load GT
     gt_boxes = []
     has_gt = label_path is not None and os.path.exists(label_path)
     if has_gt:
@@ -188,19 +279,16 @@ def run_inference_img(img_path, label_path=None, iou_threshold=0.5):
         gt_boxes = denormalize_boxes(gt_boxes_norm, img_w, img_h)
 
     models = load_models()
-
     base_img_name = os.path.splitext(os.path.basename(img_path))[0]
     output_dir = os.path.join("images", "output", base_img_name)
     os.makedirs(output_dir, exist_ok=True)
 
-    # Simpan gambar GT
+    gt_path = None
     if has_gt:
         img_gt = img.copy()
-        draw_boxes(img_gt, gt_boxes, (255, 0, 0))  # GT: biru
+        draw_boxes(img_gt, gt_boxes, (255, 0, 0))
         gt_path = os.path.join(output_dir, "ground_truth.jpg")
         cv2.imwrite(gt_path, img_gt)
-    else:
-        gt_path = None
 
     stats_all = []
 
@@ -209,33 +297,38 @@ def run_inference_img(img_path, label_path=None, iou_threshold=0.5):
         results = model.predict(img, conf=0.5)
 
         pred_boxes = []
+        confidences = []
         for box in results[0].boxes:
             conf = box.conf[0].cpu().item()
-            if conf >= iou_threshold:
-                x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
-                pred_boxes.append([int(x1), int(y1), int(x2), int(y2)])
+            print(f"confidence model {model_name}: {conf}")
+            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+            pred_boxes.append([int(x1), int(y1), int(x2), int(y2)])
+            confidences.append(conf)
 
         if has_gt:
-            matched_gt, matched_pred, false_positives, false_negatives = match_boxes(pred_boxes, gt_boxes, iou_threshold)
+            tp_boxes, fp_boxes, fn_boxes = match_boxes(pred_boxes, gt_boxes, confidences, iou_threshold)
 
-            draw_boxes(img_pred, [gt_boxes[i] for i in matched_gt], (0, 255, 0))     # TP: hijau
-            draw_boxes(img_pred, [pred_boxes[i] for i in range(len(pred_boxes)) if i not in matched_pred], (0, 0, 255))  # FP: merah
-            draw_boxes(img_pred, [gt_boxes[i] for i in range(len(gt_boxes)) if i not in matched_gt], (255, 0, 0))        # FN: biru
+            draw_boxes(img_pred, tp_boxes, (0, 255, 0))
+            draw_boxes(img_pred, fp_boxes, (0, 0, 255))
+            draw_boxes(img_pred, fn_boxes, (255, 0, 0))
 
+            total_tp = len(tp_boxes)
+            total_fp = len(fp_boxes)
+            total_fn = len(fn_boxes)
             total_pred = len(pred_boxes)
-            percentage_error = abs((total_pred - len(gt_boxes)) / len(gt_boxes)) * 100 if len(gt_boxes) > 0 else 0
+            accuracy = (total_tp / (total_tp + total_fp + total_fn)) * 100 if (total_tp + total_fp + total_fn) > 0 else 0
 
             stats = {
                 "model": model_name,
-                "True Positives": len(matched_gt),
-                "False Positives": total_pred - len(matched_pred),
-                "False Negatives": len(gt_boxes) - len(matched_gt),
+                "True Positives": total_tp,
+                "False Positives": total_fp,
+                "False Negatives": total_fn,
                 "Jumlah Aktual": len(gt_boxes),
                 "Jumlah Prediksi (TP + FP)": total_pred,
-                "Percentage Error (%)": round(percentage_error, 2)
+                "Accuracy (%)": round(accuracy, 2)
             }
         else:
-            draw_boxes(img_pred, pred_boxes, (255, 0, 0))  # Tanpa GT: semua hijau
+            draw_boxes(img_pred, pred_boxes, (255, 255, 0))
             stats = {
                 "model": model_name,
                 "Jumlah Prediksi": len(pred_boxes)
@@ -243,7 +336,100 @@ def run_inference_img(img_path, label_path=None, iou_threshold=0.5):
 
         pred_path = os.path.join(output_dir, f"{model_name}.jpg")
         cv2.imwrite(pred_path, img_pred)
+
+        # Buat folder khusus untuk model
+        model_output_dir = os.path.join(output_dir, model_name)
+        os.makedirs(model_output_dir, exist_ok=True)
         stats_all.append(stats)
 
     total_gt = len(gt_boxes) if has_gt else None
     return gt_path, output_dir, stats_all, total_gt
+
+# def run_inference_img(img_path, label_path=None, iou_threshold=0.5):
+#     img = cv2.imread(img_path)
+#     img_h, img_w = img.shape[:2]
+
+#     # Load GT
+#     gt_boxes = []
+#     has_gt = label_path is not None and os.path.exists(label_path)
+#     if has_gt:
+#         gt_boxes_norm = load_yolo_labels(label_path)
+#         gt_boxes = denormalize_boxes(gt_boxes_norm, img_w, img_h)
+
+#     models = load_models()
+
+#     base_img_name = os.path.splitext(os.path.basename(img_path))[0]
+#     output_dir = os.path.join("images", "output", base_img_name)
+#     os.makedirs(output_dir, exist_ok=True)
+
+#     # Simpan gambar GT
+#     if has_gt:
+#         img_gt = img.copy()
+#         draw_boxes(img_gt, gt_boxes, (255, 0, 0))  # GT: hijau
+#         gt_path = os.path.join(output_dir, "ground_truth.jpg")
+#         cv2.imwrite(gt_path, img_gt)
+#     else:
+#         gt_path = None
+
+#     stats_all = []
+
+#     for model, model_name in models:
+#         img_pred = img.copy()
+#         results = model.predict(img, conf=0.5)
+
+#         pred_boxes = []
+#         for box in results[0].boxes:
+#             conf = box.conf[0].cpu().item()
+#             if conf >= iou_threshold:
+#                 x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+#                 pred_boxes.append([int(x1), int(y1), int(x2), int(y2)])
+
+#         if has_gt:
+#             matched_gt, matched_pred, false_positives, false_negatives = match_boxes(pred_boxes, gt_boxes, iou_threshold)
+
+#             draw_boxes(img_pred, [gt_boxes[i] for i in matched_gt], (0, 255, 0))     # TP: hijau
+#             draw_boxes(img_pred, [pred_boxes[i] for i in range(len(pred_boxes)) if i not in matched_pred], (0, 0, 255))  # FP: merah
+#             draw_boxes(img_pred, [gt_boxes[i] for i in range(len(gt_boxes)) if i not in matched_gt], (255, 0, 0))        # FN: biru
+
+#             total_pred = len(pred_boxes)
+#             total_fp = total_pred - len(matched_pred)
+#             total_fn = len(gt_boxes) - len(matched_gt)
+#             accuracy = (len(matched_gt)/(len(matched_gt)+total_fp+total_fn))*100 if len(gt_boxes) > 0 else 0
+
+#             stats = {
+#                 "model": model_name,
+#                 "True Positives": len(matched_gt),
+#                 "False Positives": total_fp,
+#                 "False Negatives": total_fn,
+#                 "Jumlah Aktual": len(gt_boxes),
+#                 "Jumlah Prediksi (TP + FP)": total_pred,
+#                 "Accuracy (%)": round(accuracy, 2)
+#             }
+#         else:
+#             draw_boxes(img_pred, pred_boxes, (255, 255, 0))  # Tanpa GT: semua hijau
+#             stats = {
+#                 "model": model_name,
+#                 "Jumlah Prediksi": len(pred_boxes)
+#             }
+
+#         pred_path = os.path.join(output_dir, f"{model_name}.jpg")
+#         cv2.imwrite(pred_path, img_pred)
+
+        # Simpan label prediksi
+        # txt_filename = base_img_name + ".txt"  # nama file txt = nama gambar
+        # label_txt_path = os.path.join(model_output_dir, txt_filename)
+        # with open(label_txt_path, "w") as f:
+        #     for i, box in enumerate(pred_boxes):
+        #         x1, y1, x2, y2 = box
+        #         conf = confidences[i]
+        #         x_center = ((x1 + x2) / 2) / img_w
+        #         y_center = ((y1 + y2) / 2) / img_h
+        #         width = (x2 - x1) / img_w
+        #         height = (y2 - y1) / img_h
+        #         class_id = 0  # asumsi 1 kelas
+        #         f.write(f"{class_id} {x_center:.6f} {y_center:.6f} {width:.6f} {height:.6f} {conf:.6f}\n")
+
+#         stats_all.append(stats)
+
+#     total_gt = len(gt_boxes) if has_gt else None
+#     return gt_path, output_dir, stats_all, total_gt
