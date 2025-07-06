@@ -139,8 +139,8 @@ def run():
     df_display['mAP50-95(%)'] = (df_display['mAP50-95(%)'] * 100).round(2)
     df_display['Jumlah Parameter'] = df_display['Jumlah Parameter'].apply(lambda x: f"{int(x):,}")
     
-    # Tambahkan kolom indeks khusus (0, M1, ..., C11)
-    custom_indices = ['0', 'M1', 'M2', 'M3', 'M4', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11']
+    # Tambahkan kolom indeks khusus (0, M01, ..., C11)
+    custom_indices = ['0', 'M01', 'M02', 'M03', 'M04', 'C01', 'C02', 'C03', 'C04', 'C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C11']
     # Reset index dan assign ulang berdasarkan urutan data yang tersaring
     df_display.insert(0, 'ID', custom_indices[:len(df_display)])
 
@@ -216,8 +216,8 @@ def plot_bar_charts(df, selected_models):
     unique_models = df_filtered['model_name'].unique().tolist()
     model_color_map = {model: colors[i % len(colors)] for i, model in enumerate(unique_models)}
 
-    # Urutan custom model (baseline, m1-m4, c1-c11)
-    custom_order = ['baseline', 'm1', 'm2', 'm3', 'm4'] + [f'c{i}' for i in range(1, 12)]
+    # Urutan custom model (baseline, m01-m04, c01-c11)
+    custom_order = ['baseline', 'm01', 'm02', 'm03', 'm04'] + [f'c{i:02}' for i in range(1, 12)]
 
     metrics = ['precision', 'recall', 'map50', 'map50_95']
     metric_titles = {

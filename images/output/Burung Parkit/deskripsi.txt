@@ -1,0 +1,3 @@
+Gambar berukuran 785 x 524 pixels. Diambil dari https://adearisandi.wordpress.com/2012/04/25/burung-parkit-2/
+
+Model baseline memberikan 1 false positive pada area badan burung dan background. Model C06 (FRM+SPPFELAN) mendeteksi 1 false positive pada paruh burung, yang berarti masih berpotensi menganggap objek asing sebagai jeruk dekopon. Hal ini menunjukkan kelemahan dalam kemampuan membedakan fitur unik jeruk.

@@ -1,0 +1,11 @@
+Gambar berukuran 810 x 1012 pixels. Diambil dari https://www.jualpohon.com/p/jeruk-medan-berkembang-unggulnya-bibit.html
+
+Jeruk medan memiliki morfologi yang cukup mirip dengan jeruk dekopon, terutama dari segi bentuk bulat dan warna kulit (hijau hingga hijau kekuningan), namun memiliki perbedaan pada tekstur dan ukuran. Pengujian ini bertujuan untuk menilai kemampuan model dalam membedakan jeruk dekopon dari varietas jeruk lain yang tumbuh di pohon dengan lingkungan serupa.
+
+1. Seluruh model menghasilkan 5–7 false positive, termasuk baseline (6 FP).
+
+2. Model dengan FP terbanyak adalah C02 (7 FP)
+
+3. Mayoritas model lain menunjukkan deteksi di angka 5 atau 6 FP.
+
+Hasil deteksi ini mengindikasikan bahwa model cenderung kesulitan membedakan jeruk medan hijau dari dekopon, terutama karena kesamaan konteks visual dan bentuk.

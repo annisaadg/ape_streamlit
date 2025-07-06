@@ -1,0 +1,13 @@
+Gambar berukuran 640 x 640 pixels. Diambil dari https://images.app.goo.gl/WTJXactFR7BuPtNc7
+
+1. Sebagian besar model menghasilkan 20–28 FP.
+
+2. Model C05 mencatat angka tertinggi (28 FP)
+
+3. Model C10, C07, C08, dan M02 menghasilkan 25–26 FP.
+
+4. Bahkan model baseline menghasilkan 23 FP.
+
+Hasil deteksi ini menunjukkan bahwa warna kuning cerah yang sangat mirip dengan dekopon matang, bentuk bulat, dan lingkungan pohon pada perkebunan, juga menjadi faktor utama yang menyebabkan model mendeteksi jeruk medan sebagai dekopon.
+
+Secara keseluruhan, hasil menunjukkan bahwa sebagian besar model masih mengandalkan fitur visual umum seperti warna dan bentuk bulat, dan belum mampu membedakan varietas jeruk berdasarkan ciri morfologis spesifik seperti tekstur kulit atau struktur tangkai. Hal ini menandakan keterbatasan generalisasi model dalam membedakan antar-varietas dalam satu spesies buah yang serupa secara visual namun berbeda secara biologis

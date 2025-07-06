@@ -1,0 +1,15 @@
+Gambar berukuran 600x600 pixels. Diambil dari https://www.jualpohon.com/p/bibit-strawberry-california-stock-ready.html
+
+Strawberry memiliki bentuk kerucut kecil, warna merah mencolok, dan tidak tumbuh di pohon besar, sehingga sangat berbeda dengan jeruk dekopon dari segi morfologi dan konteks lingkungan. Oleh karena itu, deteksi strawberry sebagai dekopon mencerminkan kelemahan model dalam membedakan objek kecil non-target yang kontras secara visual.
+
+Sebagian besar model menunjukkan performa baik
+
+1. Model C10, M03, dan C04 tidak menghasilkan false positive sama sekali.
+
+2. Model C01, C03, C05, C06, C07, C08, C09, dan M01 hanya menghasilkan 1–2 false positive, menunjukkan sensitivitas masih terkendali.
+
+3. Model C02 mencatat 9 false positive, tertinggi dari semua model, menunjukkan bahwa kombinasi C2PSS dan FRM dalam model ini terlalu sensitif terhadap objek kecil berwarna terang.
+
+4. Model C11 dan baseline juga menunjukkan performa yang kurang optimal dengan masing-masing menghasilkan 4 dan 3 false positive.
+
+Secara keseluruhan, sebagian besar model telah cukup baik dalam menghindari kesalahan deteksi pada strawberry, tetapi beberapa model dengan sensitivitas tinggi masih rentan terhadap objek kecil dan mencolok yang bukan target deteksi.
