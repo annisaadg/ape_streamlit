@@ -84,7 +84,10 @@ def run_inference(video_path, model_path, output_dir):
 
     cap.release()
     writer.release()
-    cv2.destroyAllWindows()
+    try:
+        cv2.destroyAllWindows()
+    except cv2.error:
+        pass
 
     return output_path, counter.in_count + counter.out_count, avg_fps_str
 
